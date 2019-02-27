@@ -14,8 +14,12 @@ public class ParkingManager {
 		this.vehicles = vehicles;
 	}
 	
+	public void addVehicle(Vehicle v, int pos) {
+		this.vehicles[pos]=v;
+	}
 	
-	
-	
+	public void removeVehicle(Vehicle v, int pos) {
+		this.vehicles[pos]=null;
+	}	
 	
 }
