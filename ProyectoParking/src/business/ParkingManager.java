@@ -4,7 +4,7 @@ import data.Vehicle;
 
 public class ParkingManager {
 	
-	Vehicle[] vehicles=new Vehicle[30];
+	Vehicle[] vehicles=new Vehicle[15];
 
 	public Vehicle[] getVehicles() {
 		return vehicles;
@@ -21,5 +21,7 @@ public class ParkingManager {
 	public void removeVehicle(Vehicle v, int pos) {
 		this.vehicles[pos]=null;
 	}	
+	
+	
 	
 }

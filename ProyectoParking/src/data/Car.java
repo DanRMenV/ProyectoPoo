@@ -4,7 +4,6 @@ public class Car extends Vehicle{
 
 	public Car(String marca, String placa) {
 		super(marca, placa);
-		// TODO Auto-generated constructor stub
 	}
 
 	@Override
