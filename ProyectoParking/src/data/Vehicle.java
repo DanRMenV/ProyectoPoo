@@ -17,8 +17,15 @@ public class Vehicle {
 		this.placa = placa;
 	}
 	
-	
 	public int getPrice(int minutes) {
 		return 0;
 	}
+	
+	public Vehicle(String marca, String placa) {
+		super();
+		this.marca = marca;
+		this.placa = placa;
+	}
+	
+	
 }
