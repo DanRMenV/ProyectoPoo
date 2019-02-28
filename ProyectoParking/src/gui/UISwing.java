@@ -1,5 +1,7 @@
 package gui;
 
-public class UISwing {
+import business.ParkingManager;
 
+public class UISwing {
+	private ParkingManager pm;
 }
