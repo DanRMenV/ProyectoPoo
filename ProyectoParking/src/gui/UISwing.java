@@ -23,6 +23,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
+
 import business.ParkingManager;
 import data.Car;
 import data.Motorcycle;
@@ -43,8 +44,8 @@ public class UISwing extends JFrame{
 	
 	private ParkingManager pm;
 	
-	public UISwing(ParkingManager pm) {
-		this.pm=pm;
+	public UISwing() {
+		//this.pm=pm;
 		this.setTitle("ParkingManager");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(200,100);
@@ -53,14 +54,8 @@ public class UISwing extends JFrame{
 		this.mainPanel.setBorder(new EmptyBorder (10,10,10,10));
 		this.mainPanel.setLayout(new CardLayout(0,0));
 		this.setContentPane(mainPanel);
-		GridBagLayout gbl_contentPane = new GridBagLayout();
-		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		mainPanel.setLayout(gbl_contentPane);
 		initComponents();
-		this.setVisible(true);
+		this.mainPanel.setVisible(true);
 	}
 	
 	private void initComponents() {
@@ -77,13 +72,21 @@ public class UISwing extends JFrame{
 	//Setup menu
 	private void setupPanelMenu() {
 		this.panelMenu = new JPanel();
-		JLabel label = new JLabel("Parking");
-		label.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
-		GridBagConstraints gbc_label = new GridBagConstraints();
-		gbc_label.insets = new Insets(0, 0, 5, 5);
-		gbc_label.gridx = 5;
-		gbc_label.gridy = 0;
-		mainPanel.add(label, gbc_label);
+		
+		GridBagLayout gbl_contentPane = new GridBagLayout();
+		gbl_contentPane.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPane.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPane.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelMenu.setLayout(gbl_contentPane);
+		
+		JLabel labelParking = new JLabel("Parking");
+		labelParking.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		GridBagConstraints gbc_labelParking = new GridBagConstraints();
+		gbc_labelParking.insets = new Insets(0, 0, 5, 5);
+		gbc_labelParking.gridx = 5;
+		gbc_labelParking.gridy = 0;
+		this.panelMenu.add(labelParking, gbc_labelParking);
 		
 		JLabel lblHoraActual = new JLabel("Hora actual");
 		lblHoraActual.setFont(new Font("Bodoni MT", Font.PLAIN, 12));
@@ -91,56 +94,56 @@ public class UISwing extends JFrame{
 		gbc_lblHoraActual.insets = new Insets(0, 0, 5, 0);
 		gbc_lblHoraActual.gridx = 9;
 		gbc_lblHoraActual.gridy = 0;
-		mainPanel.add(lblHoraActual, gbc_lblHoraActual);
+		this.panelMenu.add(lblHoraActual, gbc_lblHoraActual);
 		
 		JButton btnIngreso = new JButton("Ingreso");
 		GridBagConstraints gbc_btnIngreso = new GridBagConstraints();
 		gbc_btnIngreso.insets = new Insets(0, 0, 5, 5);
 		gbc_btnIngreso.gridx = 1;
 		gbc_btnIngreso.gridy = 2;
-		mainPanel.add(btnIngreso, gbc_btnIngreso);
+		this.panelMenu.add(btnIngreso, gbc_btnIngreso);
 		
 		JButton btnEstado = new JButton("Estado");
 		GridBagConstraints gbc_btnEstado = new GridBagConstraints();
 		gbc_btnEstado.insets = new Insets(0, 0, 5, 5);
 		gbc_btnEstado.gridx = 5;
 		gbc_btnEstado.gridy = 2;
-		mainPanel.add(btnEstado, gbc_btnEstado);
+		this.panelMenu.add(btnEstado, gbc_btnEstado);
 		
 		JButton btnPagos = new JButton("Pagos");
 		GridBagConstraints gbc_btnPagos = new GridBagConstraints();
 		gbc_btnPagos.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPagos.gridx = 9;
 		gbc_btnPagos.gridy = 2;
-		mainPanel.add(btnPagos, gbc_btnPagos);
+		this.panelMenu.add(btnPagos, gbc_btnPagos);
 		
 		JButton btnRegistroClienteFrecuente = new JButton("Registro Cliente Frecuente");
 		GridBagConstraints gbc_btnRegistroClienteFrecuente = new GridBagConstraints();
 		gbc_btnRegistroClienteFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_btnRegistroClienteFrecuente.gridx = 5;
 		gbc_btnRegistroClienteFrecuente.gridy = 5;
-		mainPanel.add(btnRegistroClienteFrecuente, gbc_btnRegistroClienteFrecuente);
+		this.panelMenu.add(btnRegistroClienteFrecuente, gbc_btnRegistroClienteFrecuente);
 		
 		JButton btnStats = new JButton("Stats");
 		GridBagConstraints gbc_btnStats = new GridBagConstraints();
 		gbc_btnStats.insets = new Insets(0, 0, 5, 5);
 		gbc_btnStats.gridx = 1;
 		gbc_btnStats.gridy = 6;
-		mainPanel.add(btnStats, gbc_btnStats);
+		this.panelMenu.add(btnStats, gbc_btnStats);
 		
 		JButton btnPrecios = new JButton("Precios");
 		GridBagConstraints gbc_btnPrecios = new GridBagConstraints();
 		gbc_btnPrecios.insets = new Insets(0, 0, 5, 0);
 		gbc_btnPrecios.gridx = 9;
 		gbc_btnPrecios.gridy = 6;
-		mainPanel.add(btnPrecios, gbc_btnPrecios);
+		this.panelMenu.add(btnPrecios, gbc_btnPrecios);
 		
 		JButton btnSalidaPrograma = new JButton("Salida Programa");
 		GridBagConstraints gbc_btnSalidaPrograma = new GridBagConstraints();
 		gbc_btnSalidaPrograma.insets = new Insets(0, 0, 0, 5);
 		gbc_btnSalidaPrograma.gridx = 5;
 		gbc_btnSalidaPrograma.gridy = 7;
-		mainPanel.add(btnSalidaPrograma, gbc_btnSalidaPrograma);	
+		this.panelMenu.add(btnSalidaPrograma, gbc_btnSalidaPrograma);	
 	
 	// Listeners
 			btnIngreso.addActionListener(new ActionListener () {
@@ -200,7 +203,7 @@ public class UISwing extends JFrame{
 		gbc_lblIngreso.insets = new Insets(0, 0, 5, 5);
 		gbc_lblIngreso.gridx = 6;
 		gbc_lblIngreso.gridy = 0;
-		add(lblIngreso, gbc_lblIngreso);
+		this.panelIngreso.add(lblIngreso, gbc_lblIngreso);
 		
 		JLabel lblPlaca = new JLabel("Placa");
 		lblPlaca.setFont(new Font("Tahoma", Font.PLAIN, 15));
@@ -208,7 +211,7 @@ public class UISwing extends JFrame{
 		gbc_lblPlaca.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPlaca.gridx = 2;
 		gbc_lblPlaca.gridy = 2;
-		add(lblPlaca, gbc_lblPlaca);
+		this.panelIngreso.add(lblPlaca, gbc_lblPlaca);
 		
 		final JTextField txtPlaca = new JTextField();
 		txtPlaca.setHorizontalAlignment(SwingConstants.LEFT);
@@ -218,7 +221,7 @@ public class UISwing extends JFrame{
 		gbc_txtPlaca.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtPlaca.gridx = 7;
 		gbc_txtPlaca.gridy = 2;
-		add(txtPlaca, gbc_txtPlaca);
+		this.panelIngreso.add(txtPlaca, gbc_txtPlaca);
 		txtPlaca.setColumns(10);
 		
 		JLabel lblMarca = new JLabel("Marca");
@@ -227,7 +230,7 @@ public class UISwing extends JFrame{
 		gbc_lblMarca.insets = new Insets(0, 0, 5, 5);
 		gbc_lblMarca.gridx = 2;
 		gbc_lblMarca.gridy = 4;
-		add(lblMarca, gbc_lblMarca);
+		this.panelIngreso.add(lblMarca, gbc_lblMarca);
 		
 		final JTextField txtMarca = new JTextField();
 		txtMarca.setText("Ingrese la marca");
@@ -236,7 +239,7 @@ public class UISwing extends JFrame{
 		gbc_txtMarca.fill = GridBagConstraints.HORIZONTAL;
 		gbc_txtMarca.gridx = 7;
 		gbc_txtMarca.gridy = 4;
-		add(txtMarca, gbc_txtMarca);
+		this.panelIngreso.add(txtMarca, gbc_txtMarca);
 		txtMarca.setColumns(10);
 		
 		JLabel lblTipoVehculo = new JLabel("Tipo Vehículo");
@@ -245,7 +248,7 @@ public class UISwing extends JFrame{
 		gbc_lblTipoVehculo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTipoVehculo.gridx = 2;
 		gbc_lblTipoVehculo.gridy = 5;
-		add(lblTipoVehculo, gbc_lblTipoVehculo);
+		this.panelIngreso.add(lblTipoVehculo, gbc_lblTipoVehculo);
 		
 		JComboBox comboBoxTipoV = new JComboBox();
 		comboBoxTipoV.setToolTipText("");
@@ -254,7 +257,7 @@ public class UISwing extends JFrame{
 		gbc_comboBoxTipoV.fill = GridBagConstraints.HORIZONTAL;
 		gbc_comboBoxTipoV.gridx = 7;
 		gbc_comboBoxTipoV.gridy = 5;
-		add(comboBoxTipoV, gbc_comboBoxTipoV);
+		this.panelIngreso.add(comboBoxTipoV, gbc_comboBoxTipoV);
 		comboBoxTipoV.addItem("Moto");
 		comboBoxTipoV.addItem("Carro");
 		
@@ -263,7 +266,7 @@ public class UISwing extends JFrame{
 		gbc_btnIngresar.insets = new Insets(0, 0, 0, 5);
 		gbc_btnIngresar.gridx = 6;
 		gbc_btnIngresar.gridy = 8;
-		add(btnIngresar, gbc_btnIngresar);
+		this.panelIngreso.add(btnIngresar, gbc_btnIngresar);
 		
 		//Listeners
 		btnIngresar.addActionListener(new ActionListener () {
@@ -272,15 +275,15 @@ public class UISwing extends JFrame{
 				txtPlaca.setText("");
 				txtMarca.setText("");
 				remove(panelIngreso);
-				pm.addVehicle(v, 1);
-			//	showPanelMenu();
+				//pm.addVehicle(v, 1);
+			showPanelMenu();
 			}
 			
 			});
 		comboBoxTipoV.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				//???
-				//showPanelMenu();
+				showPanelMenu();
 			}
 		});
 	}
@@ -289,34 +292,48 @@ public class UISwing extends JFrame{
 		this.panelEstado = new JPanel();
 		
 		JLabel lblEstado = new JLabel("Estado");
-		lblEstado.setFont(new Font("Bodoni MT", Font.PLAIN, 15));
-		this.add(lblEstado, BorderLayout.NORTH);
+		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstado.gridx = 2;
+		gbc_lblEstado.gridy = 0;
+		this.panelEstado.add(lblEstado, gbc_lblEstado);
 		
-		String[] columnNames = {"Nombre",
-                "Apellido",
-                "Carrera",
-                "# de Matrícula	",
-                "PAES?"};
+		String[] columnNames = {"# Parking",
+                "Placa",
+                "Tipo Vehículo",
+                "Tiempo",
+                "Hora Entrada"};
 		
 		final JTable table;
 		//data?
 		table = new JTable(null, columnNames);
-		this.add(table, BorderLayout.CENTER);
+		GridBagConstraints gbc_table = new GridBagConstraints();
+		gbc_table.gridwidth = 3;
+		gbc_table.insets = new Insets(0, 0, 5, 5);
+		gbc_table.fill = GridBagConstraints.BOTH;
+		gbc_table.gridx = 2;
+		gbc_table.gridy = 2;
+		this.panelEstado.add(table, gbc_table);
 		
 		
 		JButton btnVolver = new JButton("Volver");
-		add(btnVolver, BorderLayout.SOUTH);
+		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
+		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
+		gbc_btnVolver.gridx = 2;
+		gbc_btnVolver.gridy = 3;
+		this.panelEstado.add(btnVolver, gbc_btnVolver);
 		
 		//listeners
 		btnVolver.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelEstado);
-				//showPanelMenu();
+				showPanelMenu();
 			}
 			});	
 	}
 	
-	public void showMenu() {
+	public void showPanelMenu() {
 		this.setSize(450, 200);
 		this.add(this.panelMenu);
 	}

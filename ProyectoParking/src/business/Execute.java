@@ -9,8 +9,8 @@ public class Execute {
 	
 	public static void main(String[] args) {
 		pmr = new ParkingManager();
-		uiSwing = new UISwing(pmr);
-		uiSwing.showMenu();
+		uiSwing = new UISwing();
+		uiSwing.showPanelMenu();
 
 		
 	}
