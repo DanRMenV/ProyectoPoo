@@ -31,38 +31,42 @@ import data.Vehicle;
 
 public class UISwing extends JFrame{
 	
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
 	private JPanel mainPanel;
 	private JPanel panelMenu;
-	private JPanel panelIngreso;
+	/*private JPanel panelIngreso;
 	private JPanel panelEstado;
 	private JPanel panelPagos;
 	private JPanel panelStats;
 	private JPanel panelPrecios;
 	private JPanel panelRegistro;
-	private JPanel panelFacturas;
+	private JPanel panelFacturas;*/
 	
 	
 	private ParkingManager pm;
 	
-	public UISwing() {
-		//this.pm=pm;
-		this.setTitle("ParkingManager");
+	public UISwing(ParkingManager pm) {
+		this.pm=pm;
+		this.setTitle("Parking Manager");
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(200,100);
 		this.setResizable(false);
-		this.mainPanel = new JPanel ();
-		this.mainPanel.setBorder(new EmptyBorder (10,10,10,10));
+		this.mainPanel = new JPanel();
+		this.mainPanel.setBorder(new EmptyBorder(10,10,10,10));
 		this.mainPanel.setLayout(new CardLayout(0,0));
 		this.setContentPane(mainPanel);
 		initComponents();
-		this.mainPanel.setVisible(true);
+		this.setVisible(true);
 	}
 	
 	private void initComponents() {
 		this.setupPanelMenu();
-		this.setupPanelIngreso();
+		/*this.setupPanelIngreso();
 		this.setupPanelEstado();
-	/*	this.setupPanelPagos();
+		this.setupPanelPagos();
 		this.setupPanelStats();
 		this.setupPanelPrecios();
 		this.setupPanelRegistro();
@@ -194,7 +198,7 @@ public class UISwing extends JFrame{
 				});
 		}
 	// Setup del panel Ingreso
-	private void setupPanelIngreso() {
+	/*private void setupPanelIngreso() {
 		this.panelIngreso = new JPanel();
 		
 		JLabel lblIngreso = new JLabel("Ingreso");
@@ -286,9 +290,9 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 			}
 		});
-	}
+	}*/
 	
-	private void setupPanelEstado() {
+	/*private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
 		
 		JLabel lblEstado = new JLabel("Estado");
@@ -331,7 +335,7 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 			}
 			});	
-	}
+	}*/
 	
 	public void showPanelMenu() {
 		this.setSize(450, 200);

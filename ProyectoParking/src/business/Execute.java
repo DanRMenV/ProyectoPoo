@@ -9,7 +9,7 @@ public class Execute {
 	
 	public static void main(String[] args) {
 		pmr = new ParkingManager();
-		uiSwing = new UISwing();
+		uiSwing = new UISwing(pmr);
 		uiSwing.showPanelMenu();
 
 		
