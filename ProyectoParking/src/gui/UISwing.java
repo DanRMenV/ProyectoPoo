@@ -284,7 +284,7 @@ public class UISwing extends JFrame{
 				txtPlaca.setText("");
 				txtMarca.setText("");
 				remove(panelIngreso);
-				//pm.addVehicle(v, 1);
+				//pm.addVehicle(v, i+1);
 			showPanelMenu();
 			}
 			
