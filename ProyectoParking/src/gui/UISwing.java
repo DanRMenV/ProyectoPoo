@@ -67,11 +67,11 @@ public class UISwing extends JFrame{
 		this.setupPanelMenu();
 		this.setupPanelIngreso();
 		this.setupPanelEstado();
-		this.setupPanelPagos();
+	/*	this.setupPanelPagos();
 		this.setupPanelStats();
 		this.setupPanelPrecios();
 		this.setupPanelRegistro();
-		this.setupPanelFactura();	
+		this.setupPanelFactura();	*/
 	}
 	
 	//Setup menu
@@ -146,38 +146,38 @@ public class UISwing extends JFrame{
 			btnIngreso.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelIngreso();
+					//showPanelIngreso();
 				}
 				});
 			
 			btnEstado.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					selectContact(cmr.getIds());
+					//selectContact(cmr.getIds());
 				}
 				});
 			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelRegistro();
+					//showPanelRegistro();
 				}
 				});
 			btnPagos.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelPagos();
+					//showPanelPagos();
 				}
 				});
 			btnStats.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelStats();
+					//showPanelStats();
 				}
 				});
 			btnPrecios.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelPrecios();
+					//showPanelPrecios();
 				}
 				});
 			
@@ -273,17 +273,18 @@ public class UISwing extends JFrame{
 				txtMarca.setText("");
 				remove(panelIngreso);
 				pm.addVehicle(v, 1);
-				showPanelMenu();
+			//	showPanelMenu();
 			}
 			
 			});
 		comboBoxTipoV.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				//???
-				showPanelMenu();
+				//showPanelMenu();
 			}
 		});
 	}
+	
 	private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
 		
@@ -309,7 +310,7 @@ public class UISwing extends JFrame{
 		btnVolver.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelEstado);
-				showPanelMenu();
+				//showPanelMenu();
 			}
 			});
 		
