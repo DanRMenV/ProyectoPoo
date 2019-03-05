@@ -37,13 +37,13 @@ public class UISwing extends JFrame{
 	private static final long serialVersionUID = 1L;
 	private JPanel mainPanel;
 	private JPanel panelMenu;
-	/*private JPanel panelIngreso;
+	private JPanel panelIngreso;
 	private JPanel panelEstado;
 	private JPanel panelPagos;
 	private JPanel panelStats;
 	private JPanel panelPrecios;
 	private JPanel panelRegistro;
-	private JPanel panelFacturas;*/
+	private JPanel panelFacturas;
 	
 	
 	private ParkingManager pm;
@@ -64,8 +64,8 @@ public class UISwing extends JFrame{
 	
 	private void initComponents() {
 		this.setupPanelMenu();
-		/*this.setupPanelIngreso();
-		this.setupPanelEstado();
+		this.setupPanelIngreso();
+		/*this.setupPanelEstado();
 		this.setupPanelPagos();
 		this.setupPanelStats();
 		this.setupPanelPrecios();
@@ -153,7 +153,7 @@ public class UISwing extends JFrame{
 			btnIngreso.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					//showPanelIngreso();
+					showPanelIngreso();
 				}
 				});
 			
@@ -161,6 +161,7 @@ public class UISwing extends JFrame{
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
 					//selectContact(cmr.getIds());
+					//showPanelEstado();
 				}
 				});
 			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
@@ -198,7 +199,7 @@ public class UISwing extends JFrame{
 				});
 		}
 	// Setup del panel Ingreso
-	/*private void setupPanelIngreso() {
+	private void setupPanelIngreso() {
 		this.panelIngreso = new JPanel();
 		
 		JLabel lblIngreso = new JLabel("Ingreso");
@@ -219,7 +220,6 @@ public class UISwing extends JFrame{
 		
 		final JTextField txtPlaca = new JTextField();
 		txtPlaca.setHorizontalAlignment(SwingConstants.LEFT);
-		txtPlaca.setText("Ingrese el número de placa");
 		GridBagConstraints gbc_txtPlaca = new GridBagConstraints();
 		gbc_txtPlaca.insets = new Insets(0, 0, 5, 0);
 		gbc_txtPlaca.fill = GridBagConstraints.HORIZONTAL;
@@ -290,7 +290,7 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 			}
 		});
-	}*/
+	}
 	
 	/*private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
@@ -341,6 +341,16 @@ public class UISwing extends JFrame{
 		this.setSize(450, 200);
 		this.add(this.panelMenu);
 	}
+	
+	public void showPanelIngreso() {
+		this.setSize(450, 200);
+		this.add(this.panelIngreso);
+	}
+	
+	/*public void showPanelEstado() {
+		this.setSize(450, 200);
+		this.add(this.panelEstado);
+	}*/
 	
 	
 	
