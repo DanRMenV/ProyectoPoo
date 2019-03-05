@@ -290,17 +290,18 @@ public class UISwing extends JFrame{
 		
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Bodoni MT", Font.PLAIN, 15));
-		add(lblEstado, BorderLayout.NORTH);
+		this.add(lblEstado, BorderLayout.NORTH);
 		
 		String[] columnNames = {"Nombre",
                 "Apellido",
                 "Carrera",
                 "# de Matrícula	",
                 "PAES?"};
+		
 		final JTable table;
 		//data?
 		table = new JTable(null, columnNames);
-		add(table, BorderLayout.CENTER);
+		this.add(table, BorderLayout.CENTER);
 		
 		
 		JButton btnVolver = new JButton("Volver");
@@ -312,9 +313,12 @@ public class UISwing extends JFrame{
 				remove(panelEstado);
 				//showPanelMenu();
 			}
-			});
-		
-		
+			});	
+	}
+	
+	public void showMenu() {
+		this.setSize(450, 200);
+		this.add(this.panelMenu);
 	}
 	
 	
