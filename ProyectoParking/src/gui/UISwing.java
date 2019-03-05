@@ -305,6 +305,14 @@ public class UISwing extends JFrame{
 		JButton btnVolver = new JButton("Volver");
 		add(btnVolver, BorderLayout.SOUTH);
 		
+		//listeners
+		btnVolver.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelEstado);
+				showPanelMenu();
+			}
+			});
+		
 		
 	}
 	
