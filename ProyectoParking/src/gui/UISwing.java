@@ -1,5 +1,6 @@
 package gui;
 
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.GridBagConstraints;
@@ -17,6 +18,7 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -219,6 +221,24 @@ public class UISwing extends JFrame{
 		add(txtPlaca, gbc_txtPlaca);
 		txtPlaca.setColumns(10);
 		
+		JLabel lblMarca = new JLabel("Marca");
+		lblMarca.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblMarca = new GridBagConstraints();
+		gbc_lblMarca.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMarca.gridx = 2;
+		gbc_lblMarca.gridy = 4;
+		add(lblMarca, gbc_lblMarca);
+		
+		final JTextField txtMarca = new JTextField();
+		txtMarca.setText("Ingrese la marca");
+		GridBagConstraints gbc_txtMarca = new GridBagConstraints();
+		gbc_txtMarca.insets = new Insets(0, 0, 5, 0);
+		gbc_txtMarca.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtMarca.gridx = 7;
+		gbc_txtMarca.gridy = 4;
+		add(txtMarca, gbc_txtMarca);
+		txtMarca.setColumns(10);
+		
 		JLabel lblTipoVehculo = new JLabel("Tipo Vehículo");
 		lblTipoVehculo.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblTipoVehculo = new GridBagConstraints();
@@ -235,6 +255,8 @@ public class UISwing extends JFrame{
 		gbc_comboBoxTipoV.gridx = 7;
 		gbc_comboBoxTipoV.gridy = 5;
 		add(comboBoxTipoV, gbc_comboBoxTipoV);
+		comboBoxTipoV.addItem("Moto");
+		comboBoxTipoV.addItem("Carro");
 		
 		JButton btnIngresar = new JButton("Ingresar");
 		GridBagConstraints gbc_btnIngresar = new GridBagConstraints();
@@ -244,8 +266,48 @@ public class UISwing extends JFrame{
 		add(btnIngresar, gbc_btnIngresar);
 		
 		//Listeners
+		btnIngresar.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				Vehicle v = new Vehicle(txtPlaca.getText(), txtMarca.getText());
+				txtPlaca.setText("");
+				txtMarca.setText("");
+				remove(panelIngreso);
+				pm.addVehicle(v, 1);
+				showPanelMenu();
+			}
+			
+			});
+		comboBoxTipoV.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				//???
+				showPanelMenu();
+			}
+		});
+	}
+	private void setupPanelEstado() {
+		this.panelEstado = new JPanel();
+		
+		JLabel lblEstado = new JLabel("Estado");
+		lblEstado.setFont(new Font("Bodoni MT", Font.PLAIN, 15));
+		add(lblEstado, BorderLayout.NORTH);
+		
+		String[] columnNames = {"Nombre",
+                "Apellido",
+                "Carrera",
+                "# de Matrícula	",
+                "PAES?"};
+		final JTable table;
+		//data?
+		table = new JTable(null, columnNames);
+		add(table, BorderLayout.CENTER);
+		
+		
+		JButton btnVolver = new JButton("Volver");
+		add(btnVolver, BorderLayout.SOUTH);
 		
 		
 	}
+	
+	
 	
 }
