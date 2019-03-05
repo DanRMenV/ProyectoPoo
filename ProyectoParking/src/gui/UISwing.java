@@ -18,6 +18,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 import business.ParkingManager;
@@ -147,19 +148,104 @@ public class UISwing extends JFrame{
 				}
 				});
 			
-			btnSelect.addActionListener(new ActionListener () {
+			btnEstado.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
 					selectContact(cmr.getIds());
 				}
 				});
-			
-			btnExit.addActionListener(new ActionListener () {
+			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
-					remove(panelWelcome);
+					remove(panelMenu);
+					showPanelRegistro();
+				}
+				});
+			btnPagos.addActionListener(new ActionListener () {
+				public void actionPerformed (ActionEvent e) {
+					remove(panelMenu);
+					showPanelPagos();
+				}
+				});
+			btnStats.addActionListener(new ActionListener () {
+				public void actionPerformed (ActionEvent e) {
+					remove(panelMenu);
+					showPanelStats();
+				}
+				});
+			btnPrecios.addActionListener(new ActionListener () {
+				public void actionPerformed (ActionEvent e) {
+					remove(panelMenu);
+					showPanelPrecios();
+				}
+				});
+			
+			
+			
+			btnSalidaPrograma.addActionListener(new ActionListener () {
+				public void actionPerformed (ActionEvent e) {
+					remove(panelMenu);
 					System.exit(0);;
 				}
 				});
 		}
+	// Setup del panel Ingreso
+	private void setupPanelIngreso() {
+		this.panelIngreso = new JPanel();
+		
+		JLabel lblIngreso = new JLabel("Ingreso");
+		lblIngreso.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
+		GridBagConstraints gbc_lblIngreso = new GridBagConstraints();
+		gbc_lblIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_lblIngreso.gridx = 6;
+		gbc_lblIngreso.gridy = 0;
+		add(lblIngreso, gbc_lblIngreso);
+		
+		JLabel lblPlaca = new JLabel("Placa");
+		lblPlaca.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblPlaca = new GridBagConstraints();
+		gbc_lblPlaca.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPlaca.gridx = 2;
+		gbc_lblPlaca.gridy = 2;
+		add(lblPlaca, gbc_lblPlaca);
+		
+		final JTextField txtPlaca = new JTextField();
+		txtPlaca.setHorizontalAlignment(SwingConstants.LEFT);
+		txtPlaca.setText("Ingrese el número de placa");
+		GridBagConstraints gbc_txtPlaca = new GridBagConstraints();
+		gbc_txtPlaca.insets = new Insets(0, 0, 5, 0);
+		gbc_txtPlaca.fill = GridBagConstraints.HORIZONTAL;
+		gbc_txtPlaca.gridx = 7;
+		gbc_txtPlaca.gridy = 2;
+		add(txtPlaca, gbc_txtPlaca);
+		txtPlaca.setColumns(10);
+		
+		JLabel lblTipoVehculo = new JLabel("Tipo Vehículo");
+		lblTipoVehculo.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblTipoVehculo = new GridBagConstraints();
+		gbc_lblTipoVehculo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoVehculo.gridx = 2;
+		gbc_lblTipoVehculo.gridy = 5;
+		add(lblTipoVehculo, gbc_lblTipoVehculo);
+		
+		JComboBox comboBoxTipoV = new JComboBox();
+		comboBoxTipoV.setToolTipText("");
+		GridBagConstraints gbc_comboBoxTipoV = new GridBagConstraints();
+		gbc_comboBoxTipoV.insets = new Insets(0, 0, 5, 0);
+		gbc_comboBoxTipoV.fill = GridBagConstraints.HORIZONTAL;
+		gbc_comboBoxTipoV.gridx = 7;
+		gbc_comboBoxTipoV.gridy = 5;
+		add(comboBoxTipoV, gbc_comboBoxTipoV);
+		
+		JButton btnIngresar = new JButton("Ingresar");
+		GridBagConstraints gbc_btnIngresar = new GridBagConstraints();
+		gbc_btnIngresar.insets = new Insets(0, 0, 0, 5);
+		gbc_btnIngresar.gridx = 6;
+		gbc_btnIngresar.gridy = 8;
+		add(btnIngresar, gbc_btnIngresar);
+		
+		//Listeners
+		
+		
+	}
 	
 }
