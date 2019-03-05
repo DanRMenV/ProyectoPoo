@@ -201,6 +201,12 @@ public class UISwing extends JFrame{
 	// Setup del panel Ingreso
 	private void setupPanelIngreso() {
 		this.panelIngreso = new JPanel();
+		GridBagLayout gbl_contentPaneIngreso = new GridBagLayout();
+		gbl_contentPaneIngreso.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPaneIngreso.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gbl_contentPaneIngreso.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gbl_contentPaneIngreso.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelIngreso.setLayout(gbl_contentPaneIngreso);
 		
 		JLabel lblIngreso = new JLabel("Ingreso");
 		lblIngreso.setFont(new Font("Bodoni MT", Font.PLAIN, 24));
@@ -237,7 +243,6 @@ public class UISwing extends JFrame{
 		this.panelIngreso.add(lblMarca, gbc_lblMarca);
 		
 		final JTextField txtMarca = new JTextField();
-		txtMarca.setText("Ingrese la marca");
 		GridBagConstraints gbc_txtMarca = new GridBagConstraints();
 		gbc_txtMarca.insets = new Insets(0, 0, 5, 0);
 		gbc_txtMarca.fill = GridBagConstraints.HORIZONTAL;
