@@ -37,8 +37,8 @@ public class ParkingManager {
 		for(Map.Entry<Vehicle,LocalDate> entry : vehicles.entrySet()) {
 		Vehicle key = entry.getKey(); 
 		if(key.getPlaca().equals(placa)) {
-			return key;
-		}	
+				return key;
+			}	
 		}
 		return null;
 	}
