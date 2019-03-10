@@ -31,4 +31,13 @@ public class Vehicle implements Comparable<Vehicle>{
 		return this.placa.compareTo(other.placa);
 	}
 	
+	@Override
+	public String toString() {
+		return "Vehicle [marca=" + marca + ", placa=" + placa+"]";
+	}
+	
+	
+	
+	
+	
 }

@@ -1,6 +1,7 @@
 package business;
 
-import java.time.LocalDate;
+
+import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
 
@@ -9,21 +10,21 @@ import data.Vehicle;
 
 public class ParkingManager {
 	
-	private TreeMap<Vehicle,LocalDate> vehicles;
+	private TreeMap<Vehicle,LocalDateTime> vehicles;
 	
-	public TreeMap<Vehicle, LocalDate> getVehicles() {
+	public TreeMap<Vehicle, LocalDateTime> getVehicles() {
 		return vehicles;
 	}
 
-	public void setVehicles(TreeMap<Vehicle, LocalDate> vehicles) {
+	public void setVehicles(TreeMap<Vehicle, LocalDateTime> vehicles) {
 		this.vehicles = vehicles;
 	}
 
 	public ParkingManager() {
-		this.vehicles = new TreeMap<Vehicle, LocalDate>();
+		this.vehicles = new TreeMap<Vehicle, LocalDateTime>();
 	}
 
-	public void addVehicle(Vehicle v,LocalDate l) {
+	public void addVehicle(Vehicle v,LocalDateTime l) {
 		this.vehicles.put(v,l);
 	}
 		
@@ -34,7 +35,7 @@ public class ParkingManager {
 	}
 
 	public Vehicle searchVehicle(String placa) {
-		for(Map.Entry<Vehicle,LocalDate> entry : vehicles.entrySet()) {
+		for(Map.Entry<Vehicle,LocalDateTime> entry : vehicles.entrySet()) {
 		Vehicle key = entry.getKey(); 
 		if(key.getPlaca().equals(placa)) {
 				return key;
@@ -42,7 +43,16 @@ public class ParkingManager {
 		}
 		return null;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ContactManager [vehicles=" + vehicles + "]";
+	}
+
 	
 	
+	
+		
 	
 }

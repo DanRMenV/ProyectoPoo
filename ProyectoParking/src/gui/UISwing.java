@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.sql.Date;
 import java.text.DateFormat;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
 
@@ -288,17 +289,18 @@ public class UISwing extends JFrame{
 		//Listeners
 		btnIngresar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				
+				LocalDateTime l=LocalDateTime.now();
 				String tipo=(String) comboBoxTipoV.getSelectedItem();
 				if(tipo.equals("Moto")){
 					Motorcycle m = new Motorcycle(txtPlaca.getText(), txtMarca.getText());
-					//pm.addVehicle(m);
+					pm.addVehicle(m,l);
 				}else {
 					Car c = new Car(txtPlaca.getText(), txtMarca.getText());
-					//pm.addVehicle(c);
+					pm.addVehicle(c,l);
 				}	
 				txtPlaca.setText("");
-				txtMarca.setText("");					
+				txtMarca.setText("");	
+				System.out.println(pm);
 				remove(panelIngreso);
 			showPanelMenu();
 			}
@@ -358,7 +360,7 @@ public class UISwing extends JFrame{
 	}*/
 	
 	public void showPanelMenu() {
-		this.setSize(450, 200);
+		this.setSize(400, 210);
 		this.add(this.panelMenu);
 	}
 	
