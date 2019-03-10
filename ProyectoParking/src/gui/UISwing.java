@@ -78,9 +78,7 @@ public class UISwing extends JFrame{
 		this.setupPanelFactura();
 		this.setupPanelPrecios();
 		this.setupPanelStats();
-		/*
 		this.setupPanelRegistro();
-			*/
 	}
 	
 	//Setup menu
@@ -182,7 +180,7 @@ public class UISwing extends JFrame{
 			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					//showPanelRegistro();
+					showPanelRegistro();
 				}
 				});
 			btnPagos.addActionListener(new ActionListener () {
@@ -751,6 +749,103 @@ public class UISwing extends JFrame{
 				}
 				});
 	}
+	private void setupPanelRegistro() {
+		this.panelRegistro = new JPanel();
+		GridBagLayout gridBagLayoutRegistro = new GridBagLayout();
+		gridBagLayoutRegistro.columnWidths = new int[]{0, 0, 0, 0, 0};
+		gridBagLayoutRegistro.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutRegistro.columnWeights = new double[]{0.0, 0.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayoutRegistro.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelRegistro.setLayout(gridBagLayoutRegistro);
+		
+		JButton buttonBack = new JButton("<-");
+		GridBagConstraints gbc_buttonBack = new GridBagConstraints();
+		gbc_buttonBack.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBack.gridx = 0;
+		gbc_buttonBack.gridy = 0;
+		this.panelRegistro.add(buttonBack, gbc_buttonBack);
+		
+		JLabel lblRegistroClienteFrecuente = new JLabel("Registro Cliente Frecuente");
+		lblRegistroClienteFrecuente.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblRegistroClienteFrecuente = new GridBagConstraints();
+		gbc_lblRegistroClienteFrecuente.insets = new Insets(0, 0, 5, 5);
+		gbc_lblRegistroClienteFrecuente.gridx = 2;
+		gbc_lblRegistroClienteFrecuente.gridy = 1;
+		this.panelRegistro.add(lblRegistroClienteFrecuente, gbc_lblRegistroClienteFrecuente);
+		
+		JLabel lblNombre = new JLabel("Nombre");
+		GridBagConstraints gbc_lblNombre = new GridBagConstraints();
+		gbc_lblNombre.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNombre.gridx = 1;
+		gbc_lblNombre.gridy = 3;
+		this.panelRegistro.add(lblNombre, gbc_lblNombre);
+		
+		JTextField textFieldNombre = new JTextField();
+		GridBagConstraints gbc_textFieldNombre = new GridBagConstraints();
+		gbc_textFieldNombre.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldNombre.gridx = 3;
+		gbc_textFieldNombre.gridy = 3;
+		this.panelRegistro.add(textFieldNombre, gbc_textFieldNombre);
+		textFieldNombre.setColumns(10);
+		
+		JLabel lblPlacaVehculo = new JLabel("Placa Veh\u00EDculo");
+		GridBagConstraints gbc_lblPlacaVehculo = new GridBagConstraints();
+		gbc_lblPlacaVehculo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPlacaVehculo.gridx = 1;
+		gbc_lblPlacaVehculo.gridy = 5;
+		this.panelRegistro.add(lblPlacaVehculo, gbc_lblPlacaVehculo);
+		
+		JTextField textFieldPlacaVehiculo = new JTextField();
+		GridBagConstraints gbc_textFieldPlacaVehiculo = new GridBagConstraints();
+		gbc_textFieldPlacaVehiculo.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldPlacaVehiculo.gridx = 3;
+		gbc_textFieldPlacaVehiculo.gridy = 5;
+		this.panelRegistro.add(textFieldPlacaVehiculo, gbc_textFieldPlacaVehiculo);
+		textFieldPlacaVehiculo.setColumns(10);
+		
+		JLabel lblNmeroDeCdula = new JLabel("N\u00FAmero de C\u00E9dula");
+		GridBagConstraints gbc_lblNmeroDeCdula = new GridBagConstraints();
+		gbc_lblNmeroDeCdula.insets = new Insets(0, 0, 5, 5);
+		gbc_lblNmeroDeCdula.gridx = 1;
+		gbc_lblNmeroDeCdula.gridy = 7;
+		this.panelRegistro.add(lblNmeroDeCdula, gbc_lblNmeroDeCdula);
+		
+		JTextField textFieldCC = new JTextField();
+		GridBagConstraints gbc_textFieldCC = new GridBagConstraints();
+		gbc_textFieldCC.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldCC.gridx = 3;
+		gbc_textFieldCC.gridy = 7;
+		this.panelRegistro.add(textFieldCC, gbc_textFieldCC);
+		textFieldCC.setColumns(10);
+		
+		JButton btnRegistro = new JButton("Registrar");
+		btnRegistro.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+			}
+		});
+		GridBagConstraints gbc_btnRegistro = new GridBagConstraints();
+		gbc_btnRegistro.insets = new Insets(0, 0, 0, 5);
+		gbc_btnRegistro.gridx = 2;
+		gbc_btnRegistro.gridy = 9;
+		this.panelRegistro.add(btnRegistro, gbc_btnRegistro);
+		
+		//listeners
+				buttonBack.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelRegistro);
+						showPanelMenu();
+						}
+						});
+				btnRegistro.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelRegistro);
+						JOptionPane.showMessageDialog(null, "El usuario ha sido registrado correctamente");
+						showPanelMenu();
+						}
+						});
+		
+
+	}
 	
 	public void showPanelMenu() {
 		this.setSize(400, 210);
@@ -781,6 +876,10 @@ public class UISwing extends JFrame{
 	}
 	public void showPanelStats() {
 		this.add(this.panelStats);
+		this.pack();
+	}
+	public void showPanelRegistro() {
+		this.add(this.panelRegistro);
 		this.pack();
 	}
 	
