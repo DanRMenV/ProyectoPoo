@@ -30,10 +30,7 @@ import data.Motorcycle;
 import data.Vehicle;
 
 public class UISwing extends JFrame{
-	
-	/**
-	 * 
-	 */
+
 	private static final long serialVersionUID = 1L;
 	private JPanel mainPanel;
 	private JPanel panelMenu;
@@ -198,6 +195,7 @@ public class UISwing extends JFrame{
 				}
 				});
 		}
+	
 	// Setup del panel Ingreso
 	private void setupPanelIngreso() {
 		this.panelIngreso = new JPanel();
@@ -259,7 +257,10 @@ public class UISwing extends JFrame{
 		gbc_lblTipoVehculo.gridy = 5;
 		this.panelIngreso.add(lblTipoVehculo, gbc_lblTipoVehculo);
 		
-		JComboBox comboBoxTipoV = new JComboBox();
+		
+		String[] opc= {"Moto","Carro"};
+		
+		JComboBox<String> comboBoxTipoV = new JComboBox<String>(opc);
 		comboBoxTipoV.setToolTipText("");
 		GridBagConstraints gbc_comboBoxTipoV = new GridBagConstraints();
 		gbc_comboBoxTipoV.insets = new Insets(0, 0, 5, 0);
@@ -267,8 +268,8 @@ public class UISwing extends JFrame{
 		gbc_comboBoxTipoV.gridx = 7;
 		gbc_comboBoxTipoV.gridy = 5;
 		this.panelIngreso.add(comboBoxTipoV, gbc_comboBoxTipoV);
-		comboBoxTipoV.addItem("Moto");
-		comboBoxTipoV.addItem("Carro");
+		/*comboBoxTipoV.addItem("Moto");
+		comboBoxTipoV.addItem("Carro");*/
 		
 		JButton btnIngresar = new JButton("Ingresar");
 		GridBagConstraints gbc_btnIngresar = new GridBagConstraints();
@@ -284,16 +285,18 @@ public class UISwing extends JFrame{
 				txtPlaca.setText("");
 				txtMarca.setText("");
 				remove(panelIngreso);
-				//pm.addVehicle(v, i+1);
+				//pm.addVehicle(v);
 			showPanelMenu();
 			}
 			
 			});
+		
 		comboBoxTipoV.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				//???
 				showPanelMenu();
 			}
+			
 		});
 	}
 	

@@ -1,6 +1,6 @@
 package data;
 
-public class Vehicle {
+public class Vehicle implements Comparable<Vehicle>{
 	private String marca;
 	private String placa;
 	
@@ -27,5 +27,9 @@ public class Vehicle {
 		this.placa = placa;
 	}
 	
+	
+	public int compareTo(Vehicle other) {
+		return this.placa.compareTo(other.placa);
+	}
 	
 }
