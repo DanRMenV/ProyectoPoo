@@ -577,18 +577,19 @@ public class UISwing extends JFrame{
 		this.panelFactura.add(btnVolverPago, gbc_btnVolverPago);
 		
 		//listeners
-				btnRealizarPago.addActionListener(new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						remove(panelFactura);
-						showPanelMenu();
-					}
-					});
-				btnVolverPago.addActionListener(new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						remove(panelFactura);
-						showPanelPagos();
-					}
-					});
+		btnRealizarPago.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelFactura);
+				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+				showPanelMenu();
+				}
+				});
+		btnVolverPago.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelFactura);
+				showPanelPagos();
+				}
+				});
 		
 		
 
