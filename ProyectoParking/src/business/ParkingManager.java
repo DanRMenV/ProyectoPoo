@@ -1,44 +1,58 @@
 package business;
 
-import java.util.TreeSet;
+
+import java.time.LocalDateTime;
+import java.util.Map;
+import java.util.TreeMap;
+
 
 import data.Vehicle;
 
 public class ParkingManager {
 	
-	private TreeSet<Vehicle> vehicles;
+	private TreeMap<Vehicle,LocalDateTime> vehicles;
 	
-	public TreeSet<Vehicle> getVehicles() {
+	public TreeMap<Vehicle, LocalDateTime> getVehicles() {
 		return vehicles;
 	}
 
-	public void setVehicles(TreeSet<Vehicle> vehicles) {
+	public void setVehicles(TreeMap<Vehicle, LocalDateTime> vehicles) {
 		this.vehicles = vehicles;
 	}
 
-	
 	public ParkingManager() {
-		this.vehicles = new TreeSet<Vehicle>();
+		this.vehicles = new TreeMap<Vehicle, LocalDateTime>();
 	}
 
-	public void addVehicle(Vehicle v) {
-		this.vehicles.add(v);
+	public void addVehicle(Vehicle v,LocalDateTime l) {
+		this.vehicles.put(v,l);
 	}
 		
-	public void deleteVehicle(String id) {
-		Vehicle v = this.searchVehicle(id);
+	public void deleteVehicle(String placa) {
+		Vehicle v = this.searchVehicle(placa);
 		if (v!=null)
 		this.vehicles.remove(v);
 	}
 
 	public Vehicle searchVehicle(String placa) {
-		for (Vehicle v : vehicles) {
-			if (v.getPlaca().equals(placa))
-				return v;
+		for(Map.Entry<Vehicle,LocalDateTime> entry : vehicles.entrySet()) {
+		Vehicle key = entry.getKey(); 
+		if(key.getPlaca().equals(placa)) {
+				return key;
+			}	
 		}
 		return null;
 	}
+
+
+	@Override
+	public String toString() {
+		return "ContactManager [vehicles=" + vehicles + "]";
+	}
+
 	
 	
+	
+		
 	
 }
