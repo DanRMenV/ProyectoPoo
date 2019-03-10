@@ -9,6 +9,7 @@ import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.geom.Dimension2D;
@@ -23,6 +24,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
@@ -44,7 +46,7 @@ public class UISwing extends JFrame{
 	private JPanel panelStats;
 	private JPanel panelPrecios;
 	private JPanel panelRegistro;
-	private JPanel panelFacturas;
+	private JPanel panelFactura;
 	
 	
 	private ParkingManager pm;
@@ -69,10 +71,11 @@ public class UISwing extends JFrame{
 		this.setupPanelIngreso();
 		this.setupPanelEstado();
 		this.setupPanelPagos();
+		this.setupPanelFactura();
 		/*this.setupPanelStats();
 		this.setupPanelPrecios();
 		this.setupPanelRegistro();
-		this.setupPanelFactura();	*/
+			*/
 	}
 	
 	//Setup menu
@@ -407,10 +410,173 @@ public class UISwing extends JFrame{
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelPagos);
-				showPanelMenu();
+				showPanelFactura();
 			}
 			});	
 		
+	}
+	
+	private void setupPanelFactura() {
+		this.panelFactura = new JPanel();
+		GridBagLayout gridBagLayoutFactura = new GridBagLayout();
+		gridBagLayoutFactura.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutFactura.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutFactura.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayoutFactura.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelFactura.setLayout(gridBagLayoutFactura);
+		
+		JLabel lblPagoParking = new JLabel("Pago Parking");
+		lblPagoParking.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblPagoParking = new GridBagConstraints();
+		gbc_lblPagoParking.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPagoParking.gridx = 3;
+		gbc_lblPagoParking.gridy = 0;
+		this.panelFactura.add(lblPagoParking, gbc_lblPagoParking);
+		
+		JLabel lblTipoVehiculo = new JLabel("Tipo Veh\u00EDculo");
+		GridBagConstraints gbc_lblTipoVehiculo = new GridBagConstraints();
+		gbc_lblTipoVehiculo.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTipoVehiculo.gridx = 1;
+		gbc_lblTipoVehiculo.gridy = 2;
+		this.panelFactura.add(lblTipoVehiculo, gbc_lblTipoVehiculo);
+		
+		JTextArea textAreaTipoVehículo = new JTextArea();
+		textAreaTipoVehículo.setEditable(false);
+		textAreaTipoVehículo.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaTipoVehículo = new GridBagConstraints();
+		gbc_textAreaTipoVehículo.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaTipoVehículo.fill = GridBagConstraints.BOTH;
+		gbc_textAreaTipoVehículo.gridx = 4;
+		gbc_textAreaTipoVehículo.gridy = 2;
+		this.panelFactura.add(textAreaTipoVehículo, gbc_textAreaTipoVehículo);
+		
+		JLabel lblPlaca = new JLabel("Placa");
+		GridBagConstraints gbc_lblPlaca = new GridBagConstraints();
+		gbc_lblPlaca.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPlaca.gridx = 1;
+		gbc_lblPlaca.gridy = 4;
+		this.panelFactura.add(lblPlaca, gbc_lblPlaca);
+		
+		JTextArea textAreaPlaca = new JTextArea();
+		textAreaPlaca.setFont(new Font("Monospaced", Font.PLAIN, 13));
+		textAreaPlaca.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaPlaca = new GridBagConstraints();
+		gbc_textAreaPlaca.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaPlaca.fill = GridBagConstraints.BOTH;
+		gbc_textAreaPlaca.gridx = 4;
+		gbc_textAreaPlaca.gridy = 4;
+		this.panelFactura.add(textAreaPlaca, gbc_textAreaPlaca);
+		
+		JLabel lblHoraEntrada = new JLabel("Hora Entrada");
+		GridBagConstraints gbc_lblHoraEntrada = new GridBagConstraints();
+		gbc_lblHoraEntrada.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHoraEntrada.gridx = 1;
+		gbc_lblHoraEntrada.gridy = 6;
+		this.panelFactura.add(lblHoraEntrada, gbc_lblHoraEntrada);
+		
+		JTextArea textAreaHoraEntrada = new JTextArea();
+		textAreaHoraEntrada.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaHoraEntrada = new GridBagConstraints();
+		gbc_textAreaHoraEntrada.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaHoraEntrada.fill = GridBagConstraints.BOTH;
+		gbc_textAreaHoraEntrada.gridx = 4;
+		gbc_textAreaHoraEntrada.gridy = 6;
+		this.panelFactura.add(textAreaHoraEntrada, gbc_textAreaHoraEntrada);
+		
+		JLabel lblHoraSalida = new JLabel("Hora Salida");
+		GridBagConstraints gbc_lblHoraSalida = new GridBagConstraints();
+		gbc_lblHoraSalida.insets = new Insets(0, 0, 5, 5);
+		gbc_lblHoraSalida.gridx = 1;
+		gbc_lblHoraSalida.gridy = 8;
+		this.panelFactura.add(lblHoraSalida, gbc_lblHoraSalida);
+		
+		JTextArea textAreaHoraSalida = new JTextArea();
+		textAreaHoraSalida.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaHoraSalida = new GridBagConstraints();
+		gbc_textAreaHoraSalida.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaHoraSalida.fill = GridBagConstraints.BOTH;
+		gbc_textAreaHoraSalida.gridx = 4;
+		gbc_textAreaHoraSalida.gridy = 8;
+		this.panelFactura.add(textAreaHoraSalida, gbc_textAreaHoraSalida);
+		
+		JLabel lblTiempominutos = new JLabel("Tiempo(Minutos)");
+		GridBagConstraints gbc_lblTiempominutos = new GridBagConstraints();
+		gbc_lblTiempominutos.insets = new Insets(0, 0, 5, 5);
+		gbc_lblTiempominutos.gridx = 1;
+		gbc_lblTiempominutos.gridy = 10;
+		this.panelFactura.add(lblTiempominutos, gbc_lblTiempominutos);
+		
+		JTextArea textAreaTiempo = new JTextArea();
+		textAreaTiempo.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaTiempo = new GridBagConstraints();
+		gbc_textAreaTiempo.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaTiempo.fill = GridBagConstraints.BOTH;
+		gbc_textAreaTiempo.gridx = 4;
+		gbc_textAreaTiempo.gridy = 10;
+		this.panelFactura.add(textAreaTiempo, gbc_textAreaTiempo);
+		
+		JLabel lblPrecioTotal = new JLabel("Precio Total");
+		GridBagConstraints gbc_lblPrecioTotal = new GridBagConstraints();
+		gbc_lblPrecioTotal.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrecioTotal.gridx = 1;
+		gbc_lblPrecioTotal.gridy = 12;
+		this.panelFactura.add(lblPrecioTotal, gbc_lblPrecioTotal);
+		
+		JTextArea textAreaPrecio = new JTextArea();
+		textAreaPrecio.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaPrecio = new GridBagConstraints();
+		gbc_textAreaPrecio.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaPrecio.fill = GridBagConstraints.BOTH;
+		gbc_textAreaPrecio.gridx = 4;
+		gbc_textAreaPrecio.gridy = 12;
+		this.panelFactura.add(textAreaPrecio, gbc_textAreaPrecio);
+		
+		JLabel lblDineroIngresado = new JLabel("Dinero ingresado");
+		GridBagConstraints gbc_lblDineroIngresado = new GridBagConstraints();
+		gbc_lblDineroIngresado.insets = new Insets(0, 0, 5, 5);
+		gbc_lblDineroIngresado.gridx = 1;
+		gbc_lblDineroIngresado.gridy = 14;
+		this.panelFactura.add(lblDineroIngresado, gbc_lblDineroIngresado);
+		
+		JTextField textFieldDinero = new JTextField();
+		GridBagConstraints gbc_textFieldDinero = new GridBagConstraints();
+		gbc_textFieldDinero.insets = new Insets(0, 0, 5, 5);
+		gbc_textFieldDinero.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textFieldDinero.gridx = 3;
+		gbc_textFieldDinero.gridy = 14;
+		this.panelFactura.add(textFieldDinero, gbc_textFieldDinero);
+		textFieldDinero.setColumns(10);
+		
+		JButton btnRealizarPago = new JButton("Realizar Pago");
+		GridBagConstraints gbc_btnRealizarPago = new GridBagConstraints();
+		gbc_btnRealizarPago.insets = new Insets(0, 0, 0, 5);
+		gbc_btnRealizarPago.gridx = 3;
+		gbc_btnRealizarPago.gridy = 16;
+		this.panelFactura.add(btnRealizarPago, gbc_btnRealizarPago);
+		
+		JButton btnVolverPago = new JButton("Volver");
+		GridBagConstraints gbc_btnVolverPago = new GridBagConstraints();
+		gbc_btnVolverPago.insets = new Insets(0, 0, 0, 5);
+		gbc_btnVolverPago.gridx = 4;
+		gbc_btnVolverPago.gridy = 16;
+		this.panelFactura.add(btnVolverPago, gbc_btnVolverPago);
+		
+		//listeners
+				btnRealizarPago.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelFactura);
+						showPanelMenu();
+					}
+					});
+				btnVolverPago.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelFactura);
+						showPanelPagos();
+					}
+					});
+		
+		
+
 	}
 	
 	
@@ -430,6 +596,10 @@ public class UISwing extends JFrame{
 	}
 	public void showPanelPagos() {
 		this.add(this.panelPagos);
+		this.pack();
+	}
+	public void showPanelFactura() {
+		this.add(this.panelFactura);
 		this.pack();
 	}
 	
