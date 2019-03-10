@@ -26,8 +26,7 @@ public class Vehicle implements Comparable<Vehicle>{
 		this.marca = marca;
 		this.placa = placa;
 	}
-	
-	
+		
 	public int compareTo(Vehicle other) {
 		return this.placa.compareTo(other.placa);
 	}

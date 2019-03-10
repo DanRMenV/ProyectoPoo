@@ -9,6 +9,10 @@ import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.sql.Date;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -25,9 +29,7 @@ import javax.swing.border.EmptyBorder;
 
 
 import business.ParkingManager;
-import data.Car;
-import data.Motorcycle;
-import data.Vehicle;
+import data.*;
 
 public class UISwing extends JFrame{
 
@@ -89,7 +91,12 @@ public class UISwing extends JFrame{
 		gbc_labelParking.gridy = 0;
 		this.panelMenu.add(labelParking, gbc_labelParking);
 		
-		JLabel lblHoraActual = new JLabel("Hora actual");
+		LocalDateTime locaDate = LocalDateTime.now();
+		int hours  = locaDate.getHour();
+		int minutes = locaDate.getMinute();
+		int seconds = locaDate.getSecond();
+		
+		JLabel lblHoraActual = new JLabel("Hora actual:"+ hours+":"+minutes+":"+seconds);
 		lblHoraActual.setFont(new Font("Bodoni MT", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblHoraActual = new GridBagConstraints();
 		gbc_lblHoraActual.insets = new Insets(0, 0, 5, 0);
@@ -281,23 +288,28 @@ public class UISwing extends JFrame{
 		//Listeners
 		btnIngresar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				Vehicle v = new Vehicle(txtPlaca.getText(), txtMarca.getText());
+				
+				String tipo=(String) comboBoxTipoV.getSelectedItem();
+				if(tipo.equals("Moto")){
+					Motorcycle m = new Motorcycle(txtPlaca.getText(), txtMarca.getText());
+					pm.addVehicle(m);
+				}else {
+					Car c = new Car(txtPlaca.getText(), txtMarca.getText());
+					pm.addVehicle(c);
+				}	
 				txtPlaca.setText("");
-				txtMarca.setText("");
+				txtMarca.setText("");					
 				remove(panelIngreso);
-				//pm.addVehicle(v);
 			showPanelMenu();
 			}
-			
-			});
-		
-		comboBoxTipoV.addActionListener(new ActionListener () {
+		});	
+		/*comboBoxTipoV.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				//???
 				showPanelMenu();
 			}
 			
-		});
+		});*/
 	}
 	
 	/*private void setupPanelEstado() {
