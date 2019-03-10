@@ -210,6 +210,7 @@ public class UISwing extends JFrame{
 					System.exit(0);;
 				}
 				});
+			
 		}
 	
 	// Setup del panel Ingreso
@@ -287,6 +288,13 @@ public class UISwing extends JFrame{
 		/*comboBoxTipoV.addItem("Moto");
 		comboBoxTipoV.addItem("Carro");*/
 		
+		JButton buttonBackIngreso = new JButton("<-");
+		GridBagConstraints gbc_buttonBackIngreso = new GridBagConstraints();
+		gbc_buttonBackIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackIngreso.gridx = 0;
+		gbc_buttonBackIngreso.gridy = 0;
+		this.panelIngreso.add(buttonBackIngreso, gbc_buttonBackIngreso);
+		
 		JButton btnIngresar = new JButton("Ingresar");
 		GridBagConstraints gbc_btnIngresar = new GridBagConstraints();
 		gbc_btnIngresar.insets = new Insets(0, 0, 0, 5);
@@ -295,6 +303,13 @@ public class UISwing extends JFrame{
 		this.panelIngreso.add(btnIngresar, gbc_btnIngresar);
 		
 		//Listeners
+		buttonBackIngreso.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelIngreso);
+				showPanelMenu();
+				}
+				});
+		
 		btnIngresar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				LocalDateTime l=LocalDateTime.now();
@@ -360,20 +375,20 @@ public class UISwing extends JFrame{
 		));
 		scrollPane.setViewportView(tableEstado);
 		
-		JButton btnVolver = new JButton("Volver");
-		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
-		gbc_btnVolver.insets = new Insets(0, 0, 5, 5);
-		gbc_btnVolver.gridx = 5;
-		gbc_btnVolver.gridy = 10;
-		this.panelEstado.add(btnVolver, gbc_btnVolver);
+		JButton buttonBackEstado = new JButton("<-");
+		GridBagConstraints gbc_buttonBackEstado = new GridBagConstraints();
+		gbc_buttonBackEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackEstado.gridx = 0;
+		gbc_buttonBackEstado.gridy = 0;
+		this.panelEstado.add(buttonBackEstado, gbc_buttonBackEstado);
 		
 		//listeners
-		btnVolver.addActionListener(new ActionListener () {
+		buttonBackEstado.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelEstado);
 				showPanelMenu();
-			}
-			});	
+				}
+				});
 	}
 	
 	private void setupPanelPagos() {
@@ -420,6 +435,13 @@ public class UISwing extends JFrame{
 		gbc_btnPagar.gridy = 10;
 		this.panelPagos.add(btnPagar, gbc_btnPagar);
 		
+		JButton buttonBackPagos = new JButton("<-");
+		GridBagConstraints gbc_buttonBackPagos = new GridBagConstraints();
+		gbc_buttonBackPagos.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackPagos.gridx = 0;
+		gbc_buttonBackPagos.gridy = 0;
+		this.panelPagos.add(buttonBackPagos, gbc_buttonBackPagos);
+		
 		//listeners
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -427,6 +449,12 @@ public class UISwing extends JFrame{
 				showPanelFactura();
 			}
 			});	
+		buttonBackPagos.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelPagos);
+				showPanelMenu();
+				}
+				});
 		
 	}
 	
@@ -568,12 +596,12 @@ public class UISwing extends JFrame{
 		gbc_btnRealizarPago.gridy = 16;
 		this.panelFactura.add(btnRealizarPago, gbc_btnRealizarPago);
 		
-		JButton btnVolverPago = new JButton("Volver");
-		GridBagConstraints gbc_btnVolverPago = new GridBagConstraints();
-		gbc_btnVolverPago.insets = new Insets(0, 0, 0, 5);
-		gbc_btnVolverPago.gridx = 4;
-		gbc_btnVolverPago.gridy = 16;
-		this.panelFactura.add(btnVolverPago, gbc_btnVolverPago);
+		JButton buttonBackFactura = new JButton("<-");
+		GridBagConstraints gbc_buttonBackFactura = new GridBagConstraints();
+		gbc_buttonBackFactura.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackFactura.gridx = 0;
+		gbc_buttonBackFactura.gridy = 0;
+		this.panelFactura.add(buttonBackFactura, gbc_buttonBackFactura);
 		
 		//listeners
 		btnRealizarPago.addActionListener(new ActionListener () {
@@ -583,7 +611,7 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 				}
 				});
-		btnVolverPago.addActionListener(new ActionListener () {
+		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelFactura);
 				showPanelPagos();
@@ -644,6 +672,13 @@ public class UISwing extends JFrame{
 		gbc_btnRealizarCambios.gridx = 4;
 		gbc_btnRealizarCambios.gridy = 6;
 		this.panelPrecios.add(btnRealizarCambios, gbc_btnRealizarCambios);
+		
+		JButton buttonBackPrecios = new JButton("<-");
+		GridBagConstraints gbc_buttonBackPrecios = new GridBagConstraints();
+		gbc_buttonBackPrecios.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackPrecios.gridx = 0;
+		gbc_buttonBackPrecios.gridy = 0;
+		this.panelPrecios.add(buttonBackPrecios, gbc_buttonBackPrecios);
 		//listeners
 				btnRealizarCambios.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
@@ -652,6 +687,13 @@ public class UISwing extends JFrame{
 						showPanelMenu();
 						}
 						});
+				buttonBackPrecios.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelPrecios);
+						showPanelMenu();
+						}
+						});
+				
 	}
 	private void setupPanelStats() {
 		this.panelStats = new JPanel();
@@ -710,12 +752,12 @@ public class UISwing extends JFrame{
 		gbc_lblMotosIngresadas.gridy = 6;
 		this.panelStats.add(lblMotosIngresadas, gbc_lblMotosIngresadas);
 		
-		JButton btnVolverStats = new JButton("Volver");
-		GridBagConstraints gbc_btnVolverStats = new GridBagConstraints();
-		gbc_btnVolverStats.insets = new Insets(0, 0, 5, 5);
-		gbc_btnVolverStats.gridx = 3;
-		gbc_btnVolverStats.gridy = 10;
-		this.panelStats.add(btnVolverStats, gbc_btnVolverStats);
+		JButton buttonBackStats = new JButton("<-");
+		GridBagConstraints gbc_buttonBackStats = new GridBagConstraints();
+		gbc_buttonBackStats.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackStats.gridx = 0;
+		gbc_buttonBackStats.gridy = 0;
+		this.panelStats.add(buttonBackStats, gbc_buttonBackStats);
 		
 		JTextArea textAreaMotosIngreso = new JTextArea();
 		textAreaMotosIngreso.setBackground(SystemColor.menu);
@@ -742,7 +784,7 @@ public class UISwing extends JFrame{
 		gbc_textAreaGanancias.gridy = 8;
 		this.panelStats.add(textAreaGanancias, gbc_textAreaGanancias);
 		//listeners
-		btnVolverStats.addActionListener(new ActionListener () {
+		buttonBackStats.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelStats);
 				showPanelMenu();
