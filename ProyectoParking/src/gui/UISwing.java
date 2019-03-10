@@ -21,6 +21,10 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Map;
+import java.util.TreeMap;
+import java.util.TreeSet;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFormattedTextField;
@@ -178,7 +182,8 @@ public class UISwing extends JFrame{
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
 					//selectContact(cmr.getIds());
-					showPanelEstado();
+					//showPanelEstado();
+					showCars(pm.getVehicles());
 				}
 				});
 			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
@@ -342,7 +347,6 @@ public class UISwing extends JFrame{
 	}
 	
 	private void setupPanelEstado() {
-		
 		this.panelEstado = new JPanel();
 		GridBagLayout gridBagLayoutEstado = new GridBagLayout();
 		gridBagLayoutEstado.columnWidths = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 0};
@@ -351,7 +355,7 @@ public class UISwing extends JFrame{
 		gridBagLayoutEstado.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelEstado.setLayout(gridBagLayoutEstado);
 		
-		final JTable  tableEstado;
+		//final JTable  tableEstado;
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
@@ -359,8 +363,24 @@ public class UISwing extends JFrame{
 		gbc_lblEstado.gridx = 5;
 		gbc_lblEstado.gridy = 1;
 		this.panelEstado.add(lblEstado, gbc_lblEstado);
-		
+	
+	}
+	
+	
+	public void showCars(TreeMap<Vehicle, LocalDateTime> tabla) {
+		final JTable  tableEstado;
 		JScrollPane scrollPane = new JScrollPane();
+		JButton buttonBackEstado = new JButton("<-");
+		JLabel lblNoAuto = new JLabel("No hay autos");
+		
+		GridBagConstraints gbc_buttonBackEstado = new GridBagConstraints();
+		gbc_buttonBackEstado.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackEstado.gridx = 0;
+		gbc_buttonBackEstado.gridy = 0;
+		this.panelEstado.add(buttonBackEstado, gbc_buttonBackEstado);
+		
+		if(tabla.size()>0) {
+		
 		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
 		gbc_scrollPane.gridwidth = 7;
 		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
@@ -369,32 +389,50 @@ public class UISwing extends JFrame{
 		gbc_scrollPane.gridy = 4;
 		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
-		tableEstado = new JTable();
-		tableEstado.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"# Parking", "Placa", "Tipo Vehículo", "Tiempo (minutos)"
-			}
-		));
+		Object[][] rows = new Object[tabla.size()][4];
+		 String[] cabeza={"Placa", "Marca", "Tipo Vehículo", "Tiempo (minutos)"};
+		 int i=0;
+		 for(Map.Entry<Vehicle,LocalDateTime> entry : tabla.entrySet()) {
+				Vehicle key = entry.getKey(); 
+				LocalDateTime value = entry.getValue();
+				
+				rows[i][0]=key.getPlaca();
+				rows[i][1]=key.getMarca();
+				rows[i][2]=key.getNameClass();
+				rows[i][3]=value;
+				i++;
+		}		 
+		 
+		tableEstado = new JTable(rows,cabeza);
 		scrollPane.setViewportView(tableEstado);
+		}else {
+			
+			lblNoAuto.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_lblEstado = new GridBagConstraints();
+			gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
+			gbc_lblEstado.gridx = 5;
+			gbc_lblEstado.gridy = 5;
+			this.panelEstado.add(lblNoAuto, gbc_lblEstado);
+		}
 		
-		JButton buttonBackEstado = new JButton("<-");
-		GridBagConstraints gbc_buttonBackEstado = new GridBagConstraints();
-		gbc_buttonBackEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonBackEstado.gridx = 0;
-		gbc_buttonBackEstado.gridy = 0;
-		this.panelEstado.add(buttonBackEstado, gbc_buttonBackEstado);
+		this.add(this.panelEstado);
+		this.pack();
 		
-		//listeners
+				//listeners
 		buttonBackEstado.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelEstado.remove(buttonBackEstado);
+				panelEstado.remove(scrollPane);
+				panelEstado.remove(lblNoAuto);
+				
 				remove(panelEstado);
 				showPanelMenu();
+				
 				}
 				});
+		
 	}
-	
+		
 	private void setupPanelPagos() {
 		this.panelPagos = new JPanel();
 		GridBagLayout gridBagLayoutPagos = new GridBagLayout();
@@ -1133,10 +1171,11 @@ public class UISwing extends JFrame{
 		this.pack();
 	}
 	
-	public void showPanelEstado() {
+	/*public void showPanelEstado() {
 		this.add(this.panelEstado);
 		this.pack();
-	}
+	}*/
+	
 	public void showPanelPagos() {
 		this.add(this.panelPagos);
 		this.pack();

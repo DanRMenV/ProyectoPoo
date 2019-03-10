@@ -21,6 +21,10 @@ public class Vehicle implements Comparable<Vehicle>{
 		return 0;
 	}
 	
+	public String getNameClass() {
+		return "Vehicle";
+	}
+	
 	public Vehicle(String marca, String placa) {
 		super();
 		this.marca = marca;

@@ -6,10 +6,16 @@ public class Car extends Vehicle{
 		super(marca, placa);
 	}
 
+	
+	
 	@Override
 	public int getPrice(int minutes) {
 		return minutes*60*90;		
 	}
 	
+	@Override
+	public String getNameClass() {
+		return "Carro";
+	}
 	
 }
