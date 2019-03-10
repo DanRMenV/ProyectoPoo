@@ -68,8 +68,8 @@ public class UISwing extends JFrame{
 		this.setupPanelMenu();
 		this.setupPanelIngreso();
 		this.setupPanelEstado();
-		/*this.setupPanelPagos();
-		this.setupPanelStats();
+		this.setupPanelPagos();
+		/*this.setupPanelStats();
 		this.setupPanelPrecios();
 		this.setupPanelRegistro();
 		this.setupPanelFactura();	*/
@@ -175,7 +175,7 @@ public class UISwing extends JFrame{
 			btnPagos.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					//showPanelPagos();
+					showPanelPagos();
 				}
 				});
 			btnStats.addActionListener(new ActionListener () {
@@ -315,7 +315,7 @@ public class UISwing extends JFrame{
 		gridBagLayoutEstado.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelEstado.setLayout(gridBagLayoutEstado);
 		
-		final JTable  table;
+		final JTable  tableEstado;
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
@@ -333,15 +333,15 @@ public class UISwing extends JFrame{
 		gbc_scrollPane.gridy = 4;
 		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
-		table = new JTable();
-		table.setModel(new DefaultTableModel(
+		tableEstado = new JTable();
+		tableEstado.setModel(new DefaultTableModel(
 			new Object[][] {
 			},
 			new String[] {
 				"# Parking", "Placa", "Tipo Vehículo", "Tiempo (minutos)"
 			}
 		));
-		scrollPane.setViewportView(table);
+		scrollPane.setViewportView(tableEstado);
 		
 		JButton btnVolver = new JButton("Volver");
 		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
@@ -359,6 +359,61 @@ public class UISwing extends JFrame{
 			});	
 	}
 	
+	private void setupPanelPagos() {
+		this.panelPagos = new JPanel();
+		GridBagLayout gridBagLayoutPagos = new GridBagLayout();
+		gridBagLayoutPagos.columnWidths = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutPagos.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutPagos.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayoutPagos.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelPagos.setLayout(gridBagLayoutPagos);
+		
+		final JTable  tablePagos;
+		JLabel lblPagos = new JLabel("Pagos");
+		lblPagos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblPagos = new GridBagConstraints();
+		gbc_lblPagos.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPagos.gridx = 5;
+		gbc_lblPagos.gridy = 1;
+		this.panelPagos.add(lblPagos, gbc_lblPagos);
+		
+		JScrollPane scrollPanePagos = new JScrollPane();
+		GridBagConstraints gbc_scrollPanePagos = new GridBagConstraints();
+		gbc_scrollPanePagos.gridwidth = 7;
+		gbc_scrollPanePagos.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPanePagos.fill = GridBagConstraints.BOTH;
+		gbc_scrollPanePagos.gridx = 1;
+		gbc_scrollPanePagos.gridy = 4;
+		this.panelPagos.add(scrollPanePagos, gbc_scrollPanePagos);
+		
+		tablePagos = new JTable();
+		tablePagos.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"# Parking", "Placa", "Tipo Vehículo", "Tiempo (minutos)"
+			}
+		));
+		scrollPanePagos.setViewportView(tablePagos);
+		
+		JButton btnPagar = new JButton("Pagar");
+		GridBagConstraints gbc_btnPagar = new GridBagConstraints();
+		gbc_btnPagar.insets = new Insets(0, 0, 5, 5);
+		gbc_btnPagar.gridx = 5;
+		gbc_btnPagar.gridy = 10;
+		this.panelPagos.add(btnPagar, gbc_btnPagar);
+		
+		//listeners
+		btnPagar.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelPagos);
+				showPanelMenu();
+			}
+			});	
+		
+	}
+	
+	
 	public void showPanelMenu() {
 		this.add(this.panelMenu);
 		this.pack();
@@ -371,6 +426,10 @@ public class UISwing extends JFrame{
 	
 	public void showPanelEstado() {
 		this.add(this.panelEstado);
+		this.pack();
+	}
+	public void showPanelPagos() {
+		this.add(this.panelPagos);
 		this.pack();
 	}
 	
