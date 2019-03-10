@@ -106,6 +106,7 @@ public class UISwing extends JFrame{
 		int seconds = locaDate.getSecond();
 		
 		JLabel lblHoraActual = new JLabel("Hora actual:"+ hours+":"+minutes+":"+seconds);
+		
 		lblHoraActual.setFont(new Font("Bodoni MT", Font.PLAIN, 12));
 		GridBagConstraints gbc_lblHoraActual = new GridBagConstraints();
 		gbc_lblHoraActual.insets = new Insets(0, 0, 5, 0);
