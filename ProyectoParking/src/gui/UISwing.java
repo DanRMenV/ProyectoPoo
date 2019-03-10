@@ -48,9 +48,10 @@ public class UISwing extends JFrame{
 	public UISwing(ParkingManager pm) {
 		this.pm=pm;
 		this.setTitle("Parking Manager");
+		this.setSize(400,300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setLocation(200,100);
-		this.setResizable(false);
+		this.setResizable(true);
 		this.mainPanel = new JPanel();
 		this.mainPanel.setBorder(new EmptyBorder(10,10,10,10));
 		this.mainPanel.setLayout(new CardLayout(0,0));
@@ -99,7 +100,7 @@ public class UISwing extends JFrame{
 		
 		JButton btnIngreso = new JButton("Ingreso");
 		GridBagConstraints gbc_btnIngreso = new GridBagConstraints();
-		gbc_btnIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_btnIngreso.insets = new Insets(0, 0, 0, 0);
 		gbc_btnIngreso.gridx = 1;
 		gbc_btnIngreso.gridy = 2;
 		this.panelMenu.add(btnIngreso, gbc_btnIngreso);
@@ -300,7 +301,7 @@ public class UISwing extends JFrame{
 		});
 	}
 	
-	/*private void setupPanelEstado() {
+	private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
 		
 		JLabel lblEstado = new JLabel("Estado");
@@ -343,22 +344,22 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 			}
 			});	
-	}*/
+	}
 	
 	public void showPanelMenu() {
-		this.setSize(450, 200);
 		this.add(this.panelMenu);
+		this.pack();
 	}
 	
 	public void showPanelIngreso() {
-		this.setSize(450, 200);
 		this.add(this.panelIngreso);
+		this.pack();
 	}
 	
-	/*public void showPanelEstado() {
-		this.setSize(450, 200);
-		this.add(this.panelEstado);
-	}*/
+	public void showPanelEstado() {
+		this.add(this.panelMenu);
+		this.pack();
+	}
 	
 	
 	
