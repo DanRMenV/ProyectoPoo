@@ -292,10 +292,10 @@ public class UISwing extends JFrame{
 				String tipo=(String) comboBoxTipoV.getSelectedItem();
 				if(tipo.equals("Moto")){
 					Motorcycle m = new Motorcycle(txtPlaca.getText(), txtMarca.getText());
-					pm.addVehicle(m);
+					//pm.addVehicle(m);
 				}else {
 					Car c = new Car(txtPlaca.getText(), txtMarca.getText());
-					pm.addVehicle(c);
+					//pm.addVehicle(c);
 				}	
 				txtPlaca.setText("");
 				txtMarca.setText("");					
