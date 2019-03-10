@@ -2,13 +2,16 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Dimension;
 import java.awt.Font;
+import java.awt.Frame;
 import java.awt.GridBagConstraints;
 import java.awt.GridBagLayout;
 import java.awt.GridLayout;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.geom.Dimension2D;
 import java.util.ArrayList;
 
 import javax.swing.BoxLayout;
@@ -18,11 +21,12 @@ import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
-
+import javax.swing.table.DefaultTableModel;
 
 import business.ParkingManager;
 import data.Car;
@@ -63,8 +67,8 @@ public class UISwing extends JFrame{
 	private void initComponents() {
 		this.setupPanelMenu();
 		this.setupPanelIngreso();
-		/*this.setupPanelEstado();
-		this.setupPanelPagos();
+		this.setupPanelEstado();
+		/*this.setupPanelPagos();
 		this.setupPanelStats();
 		this.setupPanelPrecios();
 		this.setupPanelRegistro();
@@ -159,7 +163,7 @@ public class UISwing extends JFrame{
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
 					//selectContact(cmr.getIds());
-					//showPanelEstado();
+					showPanelEstado();
 				}
 				});
 			btnRegistroClienteFrecuente.addActionListener(new ActionListener () {
@@ -302,39 +306,48 @@ public class UISwing extends JFrame{
 	}
 	
 	private void setupPanelEstado() {
-		this.panelEstado = new JPanel();
 		
+		this.panelEstado = new JPanel();
+		GridBagLayout gridBagLayoutEstado = new GridBagLayout();
+		gridBagLayoutEstado.columnWidths = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutEstado.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutEstado.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayoutEstado.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelEstado.setLayout(gridBagLayoutEstado);
+		
+		final JTable  table;
 		JLabel lblEstado = new JLabel("Estado");
 		lblEstado.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblEstado = new GridBagConstraints();
 		gbc_lblEstado.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstado.gridx = 2;
-		gbc_lblEstado.gridy = 0;
+		gbc_lblEstado.gridx = 5;
+		gbc_lblEstado.gridy = 1;
 		this.panelEstado.add(lblEstado, gbc_lblEstado);
 		
-		String[] columnNames = {"# Parking",
-                "Placa",
-                "Tipo Vehículo",
-                "Tiempo",
-                "Hora Entrada"};
+		JScrollPane scrollPane = new JScrollPane();
+		GridBagConstraints gbc_scrollPane = new GridBagConstraints();
+		gbc_scrollPane.gridwidth = 7;
+		gbc_scrollPane.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPane.fill = GridBagConstraints.BOTH;
+		gbc_scrollPane.gridx = 1;
+		gbc_scrollPane.gridy = 4;
+		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
-		final JTable table;
-		//data?
-		table = new JTable(null, columnNames);
-		GridBagConstraints gbc_table = new GridBagConstraints();
-		gbc_table.gridwidth = 3;
-		gbc_table.insets = new Insets(0, 0, 5, 5);
-		gbc_table.fill = GridBagConstraints.BOTH;
-		gbc_table.gridx = 2;
-		gbc_table.gridy = 2;
-		this.panelEstado.add(table, gbc_table);
-		
+		table = new JTable();
+		table.setModel(new DefaultTableModel(
+			new Object[][] {
+			},
+			new String[] {
+				"# Parking", "Placa", "Tipo Vehículo", "Tiempo (minutos)"
+			}
+		));
+		scrollPane.setViewportView(table);
 		
 		JButton btnVolver = new JButton("Volver");
 		GridBagConstraints gbc_btnVolver = new GridBagConstraints();
-		gbc_btnVolver.insets = new Insets(0, 0, 0, 5);
-		gbc_btnVolver.gridx = 2;
-		gbc_btnVolver.gridy = 3;
+		gbc_btnVolver.insets = new Insets(0, 0, 5, 5);
+		gbc_btnVolver.gridx = 5;
+		gbc_btnVolver.gridy = 10;
 		this.panelEstado.add(btnVolver, gbc_btnVolver);
 		
 		//listeners
@@ -357,7 +370,7 @@ public class UISwing extends JFrame{
 	}
 	
 	public void showPanelEstado() {
-		this.add(this.panelMenu);
+		this.add(this.panelEstado);
 		this.pack();
 	}
 	

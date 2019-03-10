@@ -5,6 +5,7 @@ import java.awt.GridBagLayout;
 import javax.swing.JLabel;
 import java.awt.GridBagConstraints;
 import java.awt.BorderLayout;
+import java.awt.Dimension;
 import java.awt.Font;
 import javax.swing.JTable;
 import java.awt.Insets;
@@ -37,6 +38,22 @@ public class Estado extends JPanel {
                 "Carrera",
                 "# de Matrícula	",
                 "PAES?"};
+		//Data is initialized and stored in a two-dimensional Object array
+				Object[][] data = {
+			    {"Santiago", "Suárez",
+			     "Ingeniería Eléctrica	", new Integer(3), new Boolean(false)},
+			    {"Juan", " Cáceres",
+			     "Estadística", new Integer(4), new Boolean(true)},
+			    {"Valeria", "González",
+			     "Economía", new Integer(1), new Boolean(false)},
+			    {"Steven", "Peña",
+			     "Farmacia", new Integer(9), new Boolean(true)},
+			    {"María", "Alarcón",
+			     "Arquitectura", new Integer(7), new Boolean(false)}
+		        };
+
+		        //The Table is constructed using these data and columnNames
+		        
 		
 		final JTable table;
 		//data?
