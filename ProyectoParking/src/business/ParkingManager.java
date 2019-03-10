@@ -1,11 +1,8 @@
 package business;
 
-
 import java.time.LocalDateTime;
 import java.util.Map;
 import java.util.TreeMap;
-
-
 import data.Vehicle;
 
 public class ParkingManager {
