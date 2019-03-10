@@ -3,6 +3,7 @@ package gui;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Frame;
@@ -20,10 +21,9 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
-
-import javax.swing.BoxLayout;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
+import javax.swing.JFormattedTextField;
 import javax.swing.JFrame;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -76,8 +76,9 @@ public class UISwing extends JFrame{
 		this.setupPanelEstado();
 		this.setupPanelPagos();
 		this.setupPanelFactura();
-		/*this.setupPanelStats();
 		this.setupPanelPrecios();
+		this.setupPanelStats();
+		/*
 		this.setupPanelRegistro();
 			*/
 	}
@@ -193,13 +194,13 @@ public class UISwing extends JFrame{
 			btnStats.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					//showPanelStats();
+					showPanelStats();
 				}
 				});
 			btnPrecios.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					//showPanelPrecios();
+					showPanelPrecios();
 				}
 				});
 			
@@ -591,7 +592,165 @@ public class UISwing extends JFrame{
 				}
 				});
 		}
-	
+	private void setupPanelPrecios() {
+		this.panelPrecios = new JPanel();
+		GridBagLayout gridBagLayoutPrecios = new GridBagLayout();
+		gridBagLayoutPrecios.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 175, 0, 0};
+		gridBagLayoutPrecios.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutPrecios.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
+		gridBagLayoutPrecios.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelPrecios.setLayout(gridBagLayoutPrecios);
+		
+		JLabel lblEditorPrecios = new JLabel("Precios actuales");
+		lblEditorPrecios.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblEditorPrecios = new GridBagConstraints();
+		gbc_lblEditorPrecios.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEditorPrecios.gridx = 4;
+		gbc_lblEditorPrecios.gridy = 0;
+		this.panelPrecios.add(lblEditorPrecios, gbc_lblEditorPrecios);
+		
+		JLabel lblPrecioCarro = new JLabel("Precio carro");
+		GridBagConstraints gbc_lblPrecioCarro = new GridBagConstraints();
+		gbc_lblPrecioCarro.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrecioCarro.gridx = 2;
+		gbc_lblPrecioCarro.gridy = 2;
+		this.panelPrecios.add(lblPrecioCarro, gbc_lblPrecioCarro);
+		
+		JFormattedTextField formattedTextField = new JFormattedTextField();
+		formattedTextField.setBackground(Color.WHITE);
+		GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
+		gbc_formattedTextField.insets = new Insets(0, 0, 5, 5);
+		gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
+		gbc_formattedTextField.gridx = 6;
+		gbc_formattedTextField.gridy = 2;
+		this.panelPrecios.add(formattedTextField, gbc_formattedTextField);
+		
+		JLabel lblPrecioMoto = new JLabel("Precio moto");
+		GridBagConstraints gbc_lblPrecioMoto = new GridBagConstraints();
+		gbc_lblPrecioMoto.insets = new Insets(0, 0, 5, 5);
+		gbc_lblPrecioMoto.gridx = 2;
+		gbc_lblPrecioMoto.gridy = 4;
+		this.panelPrecios.add(lblPrecioMoto, gbc_lblPrecioMoto);
+		
+		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
+		GridBagConstraints gbc_formattedTextField_1 = new GridBagConstraints();
+		gbc_formattedTextField_1.insets = new Insets(0, 0, 5, 5);
+		gbc_formattedTextField_1.fill = GridBagConstraints.HORIZONTAL;
+		gbc_formattedTextField_1.gridx = 6;
+		gbc_formattedTextField_1.gridy = 4;
+		this.panelPrecios.add(formattedTextField_1, gbc_formattedTextField_1);
+		
+		JButton btnRealizarCambios = new JButton("Realizar cambios");
+		GridBagConstraints gbc_btnRealizarCambios = new GridBagConstraints();
+		gbc_btnRealizarCambios.insets = new Insets(0, 0, 0, 5);
+		gbc_btnRealizarCambios.gridx = 4;
+		gbc_btnRealizarCambios.gridy = 6;
+		this.panelPrecios.add(btnRealizarCambios, gbc_btnRealizarCambios);
+		//listeners
+				btnRealizarCambios.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelPrecios);
+						JOptionPane.showMessageDialog(null, "Los nuevos precios han sido fijados");
+						showPanelMenu();
+						}
+						});
+	}
+	private void setupPanelStats() {
+		this.panelStats = new JPanel();
+		setBackground(SystemColor.menu);
+		GridBagLayout gridBagLayoutStats = new GridBagLayout();
+		gridBagLayoutStats.columnWidths = new int[]{0, 18, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutStats.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutStats.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		gridBagLayoutStats.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		this.panelStats.setLayout(gridBagLayoutStats);
+		
+		JLabel lblEstadisticas = new JLabel("Estadisticas");
+		lblEstadisticas.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblEstadisticas = new GridBagConstraints();
+		gbc_lblEstadisticas.insets = new Insets(0, 0, 5, 5);
+		gbc_lblEstadisticas.gridx = 3;
+		gbc_lblEstadisticas.gridy = 0;
+		this.panelStats.add(lblEstadisticas, gbc_lblEstadisticas);
+		
+		JLabel lblVehiculosIngresados = new JLabel("Vehiculos ingresados");
+		GridBagConstraints gbc_lblVehiculosIngresados = new GridBagConstraints();
+		gbc_lblVehiculosIngresados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblVehiculosIngresados.gridx = 2;
+		gbc_lblVehiculosIngresados.gridy = 2;
+		this.panelStats.add(lblVehiculosIngresados, gbc_lblVehiculosIngresados);
+		
+		JTextArea textAreaVehiculosIngreso = new JTextArea();
+		textAreaVehiculosIngreso.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaVehiculosIngreso = new GridBagConstraints();
+		gbc_textAreaVehiculosIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaVehiculosIngreso.fill = GridBagConstraints.HORIZONTAL;
+		gbc_textAreaVehiculosIngreso.gridx = 4;
+		gbc_textAreaVehiculosIngreso.gridy = 2;
+		this.panelStats.add(textAreaVehiculosIngreso, gbc_textAreaVehiculosIngreso);
+		
+		JLabel lblCarrosIngresados = new JLabel("Carros ingresados");
+		GridBagConstraints gbc_lblCarrosIngresados = new GridBagConstraints();
+		gbc_lblCarrosIngresados.insets = new Insets(0, 0, 5, 5);
+		gbc_lblCarrosIngresados.gridx = 2;
+		gbc_lblCarrosIngresados.gridy = 4;
+		this.panelStats.add(lblCarrosIngresados, gbc_lblCarrosIngresados);
+		
+		JTextArea textAreaCarrosIngreso = new JTextArea();
+		textAreaCarrosIngreso.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaCarrosIngreso = new GridBagConstraints();
+		gbc_textAreaCarrosIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaCarrosIngreso.fill = GridBagConstraints.BOTH;
+		gbc_textAreaCarrosIngreso.gridx = 4;
+		gbc_textAreaCarrosIngreso.gridy = 4;
+		this.panelStats.add(textAreaCarrosIngreso, gbc_textAreaCarrosIngreso);
+		
+		JLabel lblMotosIngresadas = new JLabel("Motos ingresadas");
+		GridBagConstraints gbc_lblMotosIngresadas = new GridBagConstraints();
+		gbc_lblMotosIngresadas.insets = new Insets(0, 0, 5, 5);
+		gbc_lblMotosIngresadas.gridx = 2;
+		gbc_lblMotosIngresadas.gridy = 6;
+		this.panelStats.add(lblMotosIngresadas, gbc_lblMotosIngresadas);
+		
+		JButton btnVolverStats = new JButton("Volver");
+		GridBagConstraints gbc_btnVolverStats = new GridBagConstraints();
+		gbc_btnVolverStats.insets = new Insets(0, 0, 5, 5);
+		gbc_btnVolverStats.gridx = 3;
+		gbc_btnVolverStats.gridy = 10;
+		this.panelStats.add(btnVolverStats, gbc_btnVolverStats);
+		
+		JTextArea textAreaMotosIngreso = new JTextArea();
+		textAreaMotosIngreso.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaMotosIngreso = new GridBagConstraints();
+		gbc_textAreaMotosIngreso.insets = new Insets(0, 0, 5, 5);
+		gbc_textAreaMotosIngreso.fill = GridBagConstraints.BOTH;
+		gbc_textAreaMotosIngreso.gridx = 4;
+		gbc_textAreaMotosIngreso.gridy = 6;
+		this.panelStats.add(textAreaMotosIngreso, gbc_textAreaMotosIngreso);
+		
+		JLabel lblGananciasDa = new JLabel("Ganancias día");
+		GridBagConstraints gbc_lblGananciasDa = new GridBagConstraints();
+		gbc_lblGananciasDa.insets = new Insets(0, 0, 0, 5);
+		gbc_lblGananciasDa.gridx = 2;
+		gbc_lblGananciasDa.gridy = 8;
+		this.panelStats.add(lblGananciasDa, gbc_lblGananciasDa);
+		
+		JTextArea textAreaGanancias = new JTextArea();
+		textAreaGanancias.setBackground(SystemColor.menu);
+		GridBagConstraints gbc_textAreaGanancias = new GridBagConstraints();
+		gbc_textAreaGanancias.insets = new Insets(0, 0, 0, 5);
+		gbc_textAreaGanancias.fill = GridBagConstraints.BOTH;
+		gbc_textAreaGanancias.gridx = 4;
+		gbc_textAreaGanancias.gridy = 8;
+		this.panelStats.add(textAreaGanancias, gbc_textAreaGanancias);
+		//listeners
+		btnVolverStats.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				remove(panelStats);
+				showPanelMenu();
+				}
+				});
+	}
 	
 	public void showPanelMenu() {
 		this.setSize(400, 210);
@@ -614,6 +773,13 @@ public class UISwing extends JFrame{
 	}
 	public void showPanelFactura() {
 		this.add(this.panelFactura);
+		this.pack();
+	}
+	public void showPanelPrecios() {
+		this.add(this.panelPrecios);
+		this.pack();
+	}public void showPanelStats() {
+		this.add(this.panelStats);
 		this.pack();
 	}
 	
