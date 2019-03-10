@@ -565,7 +565,7 @@ public class UISwing extends JFrame{
 				btnRealizarPago.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						remove(panelFactura);
-						showPanelPagos();
+						showPanelMenu();
 					}
 					});
 				btnVolverPago.addActionListener(new ActionListener () {
