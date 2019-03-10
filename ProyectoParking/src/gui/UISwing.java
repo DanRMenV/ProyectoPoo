@@ -590,10 +590,7 @@ public class UISwing extends JFrame{
 				showPanelPagos();
 				}
 				});
-		
-		
-
-	}
+		}
 	
 	
 	public void showPanelMenu() {
