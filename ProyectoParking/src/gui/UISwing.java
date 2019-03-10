@@ -778,7 +778,8 @@ public class UISwing extends JFrame{
 	public void showPanelPrecios() {
 		this.add(this.panelPrecios);
 		this.pack();
-	}public void showPanelStats() {
+	}
+	public void showPanelStats() {
 		this.add(this.panelStats);
 		this.pack();
 	}
