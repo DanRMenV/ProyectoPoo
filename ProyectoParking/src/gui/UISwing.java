@@ -195,7 +195,8 @@ public class UISwing extends JFrame{
 			btnPagos.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
-					showPanelPagos();
+					//showPanelPagos();
+					payCars(pm.getVehicles());
 				}
 				});
 			btnStats.addActionListener(new ActionListener () {
@@ -390,7 +391,7 @@ public class UISwing extends JFrame{
 		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
 		Object[][] rows = new Object[tabla.size()][4];
-		 String[] cabeza={"Placa", "Marca", "Tipo Vehículo", "Tiempo (minutos)"};
+		 String[] cabeza={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
 		 int i=0;
 		 for(Map.Entry<Vehicle,LocalDateTime> entry : tabla.entrySet()) {
 				Vehicle key = entry.getKey(); 
@@ -442,7 +443,7 @@ public class UISwing extends JFrame{
 		gridBagLayoutPagos.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelPagos.setLayout(gridBagLayoutPagos);
 		
-		final JTable  tablePagos;
+		//final JTable  tablePagos;
 		JLabel lblPagos = new JLabel("Pagos");
 		lblPagos.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblPagos = new GridBagConstraints();
@@ -450,58 +451,104 @@ public class UISwing extends JFrame{
 		gbc_lblPagos.gridx = 5;
 		gbc_lblPagos.gridy = 1;
 		this.panelPagos.add(lblPagos, gbc_lblPagos);
-		
-		JScrollPane scrollPanePagos = new JScrollPane();
-		GridBagConstraints gbc_scrollPanePagos = new GridBagConstraints();
-		gbc_scrollPanePagos.gridwidth = 7;
-		gbc_scrollPanePagos.insets = new Insets(0, 0, 5, 5);
-		gbc_scrollPanePagos.fill = GridBagConstraints.BOTH;
-		gbc_scrollPanePagos.gridx = 1;
-		gbc_scrollPanePagos.gridy = 4;
-		this.panelPagos.add(scrollPanePagos, gbc_scrollPanePagos);
-		
-		tablePagos = new JTable();
-		tablePagos.setModel(new DefaultTableModel(
-			new Object[][] {
-			},
-			new String[] {
-				"# Parking", "Placa", "Tipo Vehículo", "Tiempo (minutos)"
+	}
+	
+		public void payCars (TreeMap<Vehicle, LocalDateTime> tablaP) {
+			final JTable  tablePagos;
+			JScrollPane scrollPanePagos = new JScrollPane();
+			JButton buttonBackPagos = new JButton("<-");
+			JLabel lblNoAutoPagos = new JLabel("No hay autos");
+			
+			GridBagConstraints gbc_buttonBackPagos = new GridBagConstraints();
+			gbc_buttonBackPagos.insets = new Insets(0, 0, 5, 5);
+			gbc_buttonBackPagos.gridx = 0;
+			gbc_buttonBackPagos.gridy = 0;
+			this.panelPagos.add(buttonBackPagos, gbc_buttonBackPagos);
+			
+			if(tablaP.size()>0) {
+			
+			GridBagConstraints gbc_scrollPanePagos = new GridBagConstraints();
+			gbc_scrollPanePagos.gridwidth = 7;
+			gbc_scrollPanePagos.insets = new Insets(0, 0, 5, 5);
+			gbc_scrollPanePagos.fill = GridBagConstraints.BOTH;
+			gbc_scrollPanePagos.gridx = 1;
+			gbc_scrollPanePagos.gridy = 4;
+			this.panelPagos.add(scrollPanePagos, gbc_scrollPanePagos);
+			
+			Object[][] rows = new Object[tablaP.size()][4];
+			 String[] cabezal={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
+			 int i=0;
+			 for(Map.Entry<Vehicle,LocalDateTime> entry : tablaP.entrySet()) {
+					Vehicle key = entry.getKey(); 
+					LocalDateTime value = entry.getValue();
+					
+					rows[i][0]=key.getPlaca();
+					rows[i][1]=key.getMarca();
+					rows[i][2]=key.getNameClass();
+					rows[i][3]=value;
+					i++;
+			}		 
+			 
+			tablePagos = new JTable(rows,cabezal);
+			scrollPanePagos.setViewportView(tablePagos);
+			}else {
+				
+				lblNoAutoPagos.setFont(new Font("Tahoma", Font.PLAIN, 15));
+				GridBagConstraints gbc_lblPagos2 = new GridBagConstraints();
+				gbc_lblPagos2.insets = new Insets(0, 0, 5, 5);
+				gbc_lblPagos2.gridx = 5;
+				gbc_lblPagos2.gridy = 5;
+				this.panelPagos.add(lblNoAutoPagos, gbc_lblPagos2);
 			}
-		));
-		scrollPanePagos.setViewportView(tablePagos);
-		
-		JButton btnPagar = new JButton("Pagar");
-		GridBagConstraints gbc_btnPagar = new GridBagConstraints();
-		gbc_btnPagar.insets = new Insets(0, 0, 5, 5);
-		gbc_btnPagar.gridx = 5;
-		gbc_btnPagar.gridy = 10;
-		this.panelPagos.add(btnPagar, gbc_btnPagar);
-		
-		JButton buttonBackPagos = new JButton("<-");
-		GridBagConstraints gbc_buttonBackPagos = new GridBagConstraints();
-		gbc_buttonBackPagos.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonBackPagos.gridx = 0;
-		gbc_buttonBackPagos.gridy = 0;
-		this.panelPagos.add(buttonBackPagos, gbc_buttonBackPagos);
+			
+			JButton btnPagar = new JButton("Pagar");
+			GridBagConstraints gbc_btnPagar = new GridBagConstraints();
+			gbc_btnPagar.insets = new Insets(0, 0, 5, 5);
+			gbc_btnPagar.gridx = 5;
+			gbc_btnPagar.gridy = 10;
+			this.panelPagos.add(btnPagar, gbc_btnPagar);
+			
+			this.add(this.panelPagos);
+			this.pack();
 		
 		//listeners
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				remove(panelPagos);
+				if(tablaP.size()>0) {
+					panelPagos.remove(buttonBackPagos);
+					panelPagos.remove(scrollPanePagos);
+					panelPagos.remove(lblNoAutoPagos);
+					
+					remove(panelPagos);
 				int resp = JOptionPane.showConfirmDialog(null, "¿Cliente frecuente?");
 				if (resp == 0) {
 					showPanelFacturaFrecuente();
 				} else if (resp == 1) {
 					showPanelFactura();
 				} else if (resp == 2) {
-					showPanelPagos();
+					//showPanelPagos();
+					payCars(pm.getVehicles());
+				}
+			} else {
+				panelPagos.remove(buttonBackPagos);
+				panelPagos.remove(scrollPanePagos);
+				panelPagos.remove(lblNoAutoPagos);
+				
+				remove(panelPagos);
+				JOptionPane.showMessageDialog(null, "No hay autos para realizar el pago");
+				showPanelMenu();
 				}
 			}
-			});	
+			});
 		buttonBackPagos.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelPagos.remove(buttonBackPagos);
+				panelPagos.remove(scrollPanePagos);
+				panelPagos.remove(lblNoAutoPagos);
+				
 				remove(panelPagos);
 				showPanelMenu();
+				
 				}
 				});
 		
@@ -663,7 +710,8 @@ public class UISwing extends JFrame{
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelFactura);
-				showPanelPagos();
+				//showPanelPagos();
+				payCars(pm.getVehicles());
 				}
 				});
 		}
@@ -885,7 +933,8 @@ public class UISwing extends JFrame{
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelFacturaFrecuente);
-				showPanelPagos();
+				//showPanelPagos();
+				payCars(pm.getVehicles());
 				}
 				});
 		}
@@ -1176,10 +1225,10 @@ public class UISwing extends JFrame{
 		this.pack();
 	}*/
 	
-	public void showPanelPagos() {
+	/*public void showPanelPagos() {
 		this.add(this.panelPagos);
 		this.pack();
-	}
+	}*/
 	public void showPanelFactura() {
 		this.add(this.panelFactura);
 		this.pack();

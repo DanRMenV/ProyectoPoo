@@ -47,7 +47,7 @@ public class ParkingManager {
 
 	@Override
 	public String toString() {
-		return "ContactManager [vehicles=" + vehicles + "]";
+		return "ParkingManager [vehicles=" + vehicles + "]";
 	}
 
 	
