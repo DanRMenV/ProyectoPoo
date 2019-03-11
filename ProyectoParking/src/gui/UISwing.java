@@ -555,15 +555,15 @@ public class UISwing extends JFrame{
 		//listeners
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-					int row=tablePagos.getSelectedRow();
+					if(tablePagos.getSelectedRow()!=-1) {
 					panelPagos.remove(buttonBackPagos);
 					panelPagos.remove(scrollPanePagos);
 					
-					String placa=(String) tablePagos.getValueAt(row, 0);
+					String placa=(String) tablePagos.getModel().getValueAt(tablePagos.getSelectedRow(), 0);
 					Vehicle v=pm.searchVehicle(placa);
 					
 					Cliente_Parking c =cm.searchClient(placa);
-					
+					System.out.println(c);
 					if(c!=null) {
 						facturaCF(v,c);
 					}else {
@@ -571,7 +571,7 @@ public class UISwing extends JFrame{
 					}
 								
 					remove(panelPagos);
-					
+			}		
 			
 			}
 			});

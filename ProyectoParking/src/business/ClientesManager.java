@@ -36,12 +36,12 @@ public class ClientesManager {
 		this.clientes.add(c);
 	}
 	public Cliente_Parking searchClient(String placa) {
-		for( Iterator<Cliente_Parking> it = clientes.iterator(); it.hasNext();) {
-			Cliente_Parking cp = (Cliente_Parking)it.next(); 
-			if(cp.getPlaca().equals(placa)) {
-				return cp;
-			}	
+		for(Cliente_Parking c: clientes) {
+			if(c.getPlaca().equals(placa)) {
+				return c;
+			}
 		}
+		
 		return null;
 	}
 	
