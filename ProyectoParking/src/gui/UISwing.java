@@ -603,8 +603,6 @@ public class UISwing extends JFrame{
 		gbc_lblTipoVehiculo.gridy = 2;
 		this.panelFactura.add(lblTipoVehiculo, gbc_lblTipoVehiculo);
 		
-		
-		
 		JLabel lblPlaca = new JLabel("Placa: "+v.getPlaca());
 		GridBagConstraints gbc_lblPlaca = new GridBagConstraints();
 		gbc_lblPlaca.insets = new Insets(0, 0, 5, 5);
@@ -620,8 +618,6 @@ public class UISwing extends JFrame{
 		gbc_lblHoraEntrada.gridy = 6;
 		this.panelFactura.add(lblHoraEntrada, gbc_lblHoraEntrada);
 		
-		
-		
 		LocalDateTime horaAct=LocalDateTime.now();
 		JLabel lblHoraSalida = new JLabel("Hora Salida: "+ horaAct);
 		GridBagConstraints gbc_lblHoraSalida = new GridBagConstraints();
@@ -629,8 +625,7 @@ public class UISwing extends JFrame{
 		gbc_lblHoraSalida.gridx = 1;
 		gbc_lblHoraSalida.gridy = 8;
 		this.panelFactura.add(lblHoraSalida, gbc_lblHoraSalida);
-		
-		
+				
 		int minutes=0;
 		JLabel lblTiempominutos = new JLabel("Tiempo(Minutos): "+minutes);
 		GridBagConstraints gbc_lblTiempominutos = new GridBagConstraints();
@@ -683,13 +678,38 @@ public class UISwing extends JFrame{
 		//Listeners
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelFactura.remove(buttonBackFactura);
+				panelFactura.remove(lblPagoParking);
+				panelFactura.remove(lblTipoVehiculo);
+				panelFactura.remove(lblPlaca);
+				panelFactura.remove(lblHoraEntrada);
+				panelFactura.remove(lblHoraSalida);
+				panelFactura.remove(lblTiempominutos);
+				panelFactura.remove(lblPrecioTotal);
+				panelFactura.remove(lblDineroIngresado);
+				panelFactura.remove(textFieldDinero);
+				panelFactura.remove(btnRealizarPago);
+				panelFactura.remove(buttonBackFactura);
 				remove(panelFactura);
+				
 				payCars(pm.getVehicles());
 				}
 				});
 		
 		btnRealizarPago.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelFactura.remove(buttonBackFactura);
+				panelFactura.remove(lblPagoParking);
+				panelFactura.remove(lblTipoVehiculo);
+				panelFactura.remove(lblPlaca);
+				panelFactura.remove(lblHoraEntrada);
+				panelFactura.remove(lblHoraSalida);
+				panelFactura.remove(lblTiempominutos);
+				panelFactura.remove(lblPrecioTotal);
+				panelFactura.remove(lblDineroIngresado);
+				panelFactura.remove(textFieldDinero);
+				panelFactura.remove(btnRealizarPago);
+				panelFactura.remove(buttonBackFactura);
 				remove(panelFactura);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
 				showPanelMenu();
@@ -732,7 +752,6 @@ public class UISwing extends JFrame{
 		gbc_lblTipoVehiculoFrecuente.gridx = 1;
 		gbc_lblTipoVehiculoFrecuente.gridy = 4;
 		this.panelFacturaFrecuente.add(lblTipoVehiculoFrecuente, gbc_lblTipoVehiculoFrecuente);
-		
 		
 		JLabel lblPlacaFrecuente = new JLabel("Placa: "+ v.getPlaca());
 		GridBagConstraints gbc_lblPlacaFrecuente = new GridBagConstraints();
@@ -807,7 +826,6 @@ public class UISwing extends JFrame{
 		gbc_lblDescuento.gridy = 20;
 		this.panelFacturaFrecuente.add(lblDescuento, gbc_lblDescuento);
 		
-		
 		JLabel lblDineroIngresadoFrecuente = new JLabel("Dinero ingresado: ");
 		GridBagConstraints gbc_lblDineroIngresadoFrecuente = new GridBagConstraints();
 		gbc_lblDineroIngresadoFrecuente.insets = new Insets(0, 0, 5, 5);
@@ -842,6 +860,23 @@ public class UISwing extends JFrame{
 		//listeners
 		btnRealizarPagoFrecuente.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
+				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
+				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
+				panelFacturaFrecuente.remove(lblPlacaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
+				panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
+				panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
+				panelFacturaFrecuente.remove(lblRedencionPuntos);
+				panelFacturaFrecuente.remove(rdbtnRadioButton);
+				panelFacturaFrecuente.remove(lblNumeroARedimir);
+				panelFacturaFrecuente.remove(formattedTextFieldPuntos);
+				panelFacturaFrecuente.remove(lblDescuento);
+				panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
+				panelFacturaFrecuente.remove(textFieldDineroFrecuente);
+				panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
+				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
 				showPanelMenu();
@@ -850,13 +885,28 @@ public class UISwing extends JFrame{
 		
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
+				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
+				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
+				panelFacturaFrecuente.remove(lblPlacaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
+				panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
+				panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
+				panelFacturaFrecuente.remove(lblRedencionPuntos);
+				panelFacturaFrecuente.remove(rdbtnRadioButton);
+				panelFacturaFrecuente.remove(lblNumeroARedimir);
+				panelFacturaFrecuente.remove(formattedTextFieldPuntos);
+				panelFacturaFrecuente.remove(lblDescuento);
+				panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
+				panelFacturaFrecuente.remove(textFieldDineroFrecuente);
+				panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
+				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
 				//showPanelPagos();
 				payCars(pm.getVehicles());
 				}
 				});
-		
-		
 	}
 	
 	private void setupPanelPrecios() {
@@ -1126,6 +1176,7 @@ public class UISwing extends JFrame{
 						});
 				btnRegistro.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
+						//Cliente_Parking c=new Cliente_Parking(textFieldCC.getText(),textFieldNombre.getText(),);
 						remove(panelRegistro);
 						JOptionPane.showMessageDialog(null, "El usuario ha sido registrado correctamente");
 						showPanelMenu();
