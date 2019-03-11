@@ -88,8 +88,6 @@ public class UISwing extends JFrame{
 		this.setupPanelPagos();
 		this.setupPanelFactura();
 		this.setupPanelFacturaFrecuente();
-		this.setupPanelPrecios();
-		this.setupPanelStats();
 		this.setupPanelRegistro();
 		this.setupPanelClientes();
 	}
@@ -155,20 +153,6 @@ public class UISwing extends JFrame{
 		gbc_btnRegistroClienteFrecuente.gridy = 5;
 		this.panelMenu.add(btnRegistroClienteFrecuente, gbc_btnRegistroClienteFrecuente);
 		
-		JButton btnStats = new JButton("Stats");
-		GridBagConstraints gbc_btnStats = new GridBagConstraints();
-		gbc_btnStats.insets = new Insets(0, 0, 5, 5);
-		gbc_btnStats.gridx = 1;
-		gbc_btnStats.gridy = 6;
-		this.panelMenu.add(btnStats, gbc_btnStats);
-		
-		JButton btnPrecios = new JButton("Precios");
-		GridBagConstraints gbc_btnPrecios = new GridBagConstraints();
-		gbc_btnPrecios.insets = new Insets(0, 0, 5, 0);
-		gbc_btnPrecios.gridx = 9;
-		gbc_btnPrecios.gridy = 6;
-		this.panelMenu.add(btnPrecios, gbc_btnPrecios);
-		
 		JButton btnSalidaPrograma = new JButton("Salida Programa");
 		GridBagConstraints gbc_btnSalidaPrograma = new GridBagConstraints();
 		gbc_btnSalidaPrograma.insets = new Insets(0, 0, 0, 5);
@@ -210,24 +194,11 @@ public class UISwing extends JFrame{
 					}
 				}
 				});
-			btnStats.addActionListener(new ActionListener () {
-				public void actionPerformed (ActionEvent e) {
-					remove(panelMenu);
-					showPanelStats();
-				}
-				});
-			btnPrecios.addActionListener(new ActionListener () {
-				public void actionPerformed (ActionEvent e) {
-					remove(panelMenu);
-					showPanelPrecios();
-				}
-				});
-			
-			
-			
+	
 			btnSalidaPrograma.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
+					cm.saveClients();
 					System.exit(0);;
 				}
 				});
@@ -630,13 +601,12 @@ public class UISwing extends JFrame{
 		gbc_lblPlaca.gridy = 4;
 		this.panelFactura.add(lblPlaca, gbc_lblPlaca);
 		
-		LocalDateTime Entrada = pm.getVehicles().get(v);
-		int hours1  = Entrada.getHour();
-		int minutes1 = Entrada.getMinute();
-		int seconds1 = Entrada.getSecond();
-		String horaFacturaEntradaC = (""+ hours1+":"+minutes1+":"+seconds1);
-		
-		JLabel lblHoraEntrada = new JLabel("Hora Entrada: "+horaFacturaEntradaC);
+		LocalDateTime localDateE = pm.getVehicles().get(v);
+		int hoursE  = localDateE.getHour();
+		int minutesE = localDateE.getMinute();
+		int secondsE = localDateE.getSecond();
+		String horaFacturaE = (""+ hoursE+":"+minutesE+":"+secondsE);
+		JLabel lblHoraEntrada = new JLabel("Hora Entrada: "+ horaFacturaE);
 		GridBagConstraints gbc_lblHoraEntrada = new GridBagConstraints();
 		gbc_lblHoraEntrada.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraEntrada.gridx = 1;
@@ -654,9 +624,17 @@ public class UISwing extends JFrame{
 		gbc_lblHoraSalida.gridx = 1;
 		gbc_lblHoraSalida.gridy = 8;
 		this.panelFactura.add(lblHoraSalida, gbc_lblHoraSalida);
-				
-		int minutes=0;
-		JLabel lblTiempominutos = new JLabel("Tiempo(Minutos): "+minutes);
+		
+		int secdif=0;
+		if(seconds>=secondsE) {
+			secdif=seconds-secondsE;
+		}else {
+			secdif=60-secondsE;
+		}
+		
+		int segundos=(hours-hoursE)*60*60+(minutos-minutesE)*60+secdif;
+		
+		JLabel lblTiempominutos = new JLabel("Tiempo(segundos): "+segundos );
 		GridBagConstraints gbc_lblTiempominutos = new GridBagConstraints();
 		gbc_lblTiempominutos.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTiempominutos.gridx = 1;
@@ -664,7 +642,7 @@ public class UISwing extends JFrame{
 		this.panelFactura.add(lblTiempominutos, gbc_lblTiempominutos);
 		
 		
-		JLabel lblPrecioTotal = new JLabel("Precio Total"+ v.getPrice(minutes));
+		JLabel lblPrecioTotal = new JLabel("Precio Total"+ v.getPrice(segundos));
 		GridBagConstraints gbc_lblPrecioTotal = new GridBagConstraints();
 		gbc_lblPrecioTotal.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioTotal.gridx = 1;
@@ -727,6 +705,9 @@ public class UISwing extends JFrame{
 		
 		btnRealizarPago.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				int monto=Integer.parseInt(textFieldDinero.getText());
+				int total=v.getPrice(segundos);
+				if(monto>=total) {
 				panelFactura.remove(buttonBackFactura);
 				panelFactura.remove(lblPagoParking);
 				panelFactura.remove(lblTipoVehiculo);
@@ -740,9 +721,28 @@ public class UISwing extends JFrame{
 				panelFactura.remove(btnRealizarPago);
 				panelFactura.remove(buttonBackFactura);
 				remove(panelFactura);
-				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es: "+(monto-total));
+				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
+				}else {
+				panelFactura.remove(buttonBackFactura);
+				panelFactura.remove(lblPagoParking);
+				panelFactura.remove(lblTipoVehiculo);
+				panelFactura.remove(lblPlaca);
+				panelFactura.remove(lblHoraEntrada);
+				panelFactura.remove(lblHoraSalida);
+				panelFactura.remove(lblTiempominutos);
+				panelFactura.remove(lblPrecioTotal);
+				panelFactura.remove(lblDineroIngresado);
+				panelFactura.remove(textFieldDinero);
+				panelFactura.remove(btnRealizarPago);
+				panelFactura.remove(buttonBackFactura);
+				remove(panelFactura);
+				JOptionPane.showMessageDialog(null, "Dinero Insufusciente");
+				facturaN(v);
 				}
+			}
+			
 				});
 	}
 	
@@ -789,13 +789,13 @@ public class UISwing extends JFrame{
 		gbc_lblPlacaFrecuente.gridy = 6;
 		this.panelFacturaFrecuente.add(lblPlacaFrecuente, gbc_lblPlacaFrecuente);
 		
-		LocalDateTime Entrada = pm.getVehicles().get(v);
-		int hours1  = Entrada.getHour();
-		int minutes1 = Entrada.getMinute();
-		int seconds1 = Entrada.getSecond();
-		String horaFacturaEntradaC = (""+ hours1+":"+minutes1+":"+seconds1);
 		
-		JLabel lblHoraEntradaFrecuente = new JLabel("Hora Entrada: "+horaFacturaEntradaC);
+		LocalDateTime localDateE = pm.getVehicles().get(v);
+		int hoursE  = localDateE.getHour();
+		int minutesE = localDateE.getMinute();
+		int secondsE = localDateE.getSecond();
+		String horaFacturaE = (""+ hoursE+":"+minutesE+":"+secondsE);
+		JLabel lblHoraEntradaFrecuente = new JLabel("Hora Entrada: "+ horaFacturaE);
 		GridBagConstraints gbc_lblHoraEntradaFrecuente = new GridBagConstraints();
 		gbc_lblHoraEntradaFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraEntradaFrecuente.gridx = 1;
@@ -814,15 +814,22 @@ public class UISwing extends JFrame{
 		gbc_lblHoraSalidaFrecuente.gridy = 10;
 		this.panelFacturaFrecuente.add(lblHoraSalidaFrecuente, gbc_lblHoraSalidaFrecuente);
 		
-		int minutos=0;
-		JLabel lblTiempominutosFrecuente = new JLabel("Tiempo(Minutos): "+ minutos);
+		int secdif=0;
+		if(seconds>=secondsE) {
+			secdif=seconds-secondsE;
+		}else {
+			secdif=60-secondsE;
+		}
+		int segundos=(hours-hoursE)*60*60+(minutes-minutesE)*60+secdif;
+
+		JLabel lblTiempominutosFrecuente = new JLabel("Tiempo(Minutos): "+ segundos);
 		GridBagConstraints gbc_lblTiempominutosFrecuente = new GridBagConstraints();
 		gbc_lblTiempominutosFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblTiempominutosFrecuente.gridx = 1;
 		gbc_lblTiempominutosFrecuente.gridy = 12;
 		this.panelFacturaFrecuente.add(lblTiempominutosFrecuente, gbc_lblTiempominutosFrecuente);
 		
-		JLabel lblPrecioTotalFrecuente = new JLabel("Precio Total: "+ v.getPrice(minutos));
+		JLabel lblPrecioTotalFrecuente = new JLabel("Precio Total: "+ v.getPrice(segundos));
 		GridBagConstraints gbc_lblPrecioTotalFrecuente = new GridBagConstraints();
 		gbc_lblPrecioTotalFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioTotalFrecuente.gridx = 1;
@@ -858,7 +865,8 @@ public class UISwing extends JFrame{
 		gbc_formattedTextFieldPuntos.gridy = 18;
 		this.panelFacturaFrecuente.add(formattedTextFieldPuntos, gbc_formattedTextFieldPuntos);
 		
-		JLabel lblDescuento = new JLabel("Descuento");
+		int desc=Integer.parseInt(formattedTextFieldPuntos.getText());
+		JLabel lblDescuento = new JLabel("Descuento: "+ desc*50);
 		GridBagConstraints gbc_lblDescuento = new GridBagConstraints();
 		gbc_lblDescuento.insets = new Insets(0, 0, 0, 5);
 		gbc_lblDescuento.gridx = 1;
@@ -900,10 +908,13 @@ public class UISwing extends JFrame{
 		//listeners
 		btnRealizarPagoFrecuente.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-				
+				int puntTrans=segundos;
 				int punt=Integer.parseInt(formattedTextFieldPuntos.getText());
+				int nuevosPuntos=puntTrans-punt;
+				int monto=Integer.parseInt(textFieldDineroFrecuente.getText());
+				int total=v.getPrice(segundos);
 				
-				if(punt<=cp.getPuntos()) {
+				if(punt<=cp.getPuntos() && monto>=total) {
 				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
 				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
 				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
@@ -921,35 +932,62 @@ public class UISwing extends JFrame{
 				panelFacturaFrecuente.remove(textFieldDineroFrecuente);
 				panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
 				panelFacturaFrecuente.remove(buttonBackFactura);
+				
 				remove(panelFacturaFrecuente);
-				cp.setPuntos(5);
-				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");				
+				cp.setPuntos(nuevosPuntos);
+				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es: "+(monto-total));				
 				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
-				else {
-					panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
-					panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
-					panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
-					panelFacturaFrecuente.remove(lblPlacaFrecuente);
-					panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
-					panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
-					panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
-					panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
-					panelFacturaFrecuente.remove(lblRedencionPuntos);
-					panelFacturaFrecuente.remove(rdbtnRadioButton);
-					panelFacturaFrecuente.remove(lblNumeroARedimir);
-					panelFacturaFrecuente.remove(formattedTextFieldPuntos);
-					panelFacturaFrecuente.remove(lblDescuento);
-					panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
-					panelFacturaFrecuente.remove(textFieldDineroFrecuente);
-					panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
-					panelFacturaFrecuente.remove(buttonBackFactura);
+				
+				if(punt>cp.getPuntos()) {
+				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
+				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
+				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
+				panelFacturaFrecuente.remove(lblPlacaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
+				panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
+				panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
+				panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
+				panelFacturaFrecuente.remove(lblRedencionPuntos);
+				panelFacturaFrecuente.remove(rdbtnRadioButton);
+				panelFacturaFrecuente.remove(lblNumeroARedimir);
+				panelFacturaFrecuente.remove(formattedTextFieldPuntos);
+				panelFacturaFrecuente.remove(lblDescuento);
+				panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
+				panelFacturaFrecuente.remove(textFieldDineroFrecuente);
+				panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
+				panelFacturaFrecuente.remove(buttonBackFactura);
 					remove(panelFacturaFrecuente);
 					JOptionPane.showMessageDialog(null, "Datos incorrectos. Intente nuevamente");
 					facturaCF(v,cp);
-					
 				}
+				
+				if(monto<total) {
+					{
+						panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
+						panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
+						panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
+						panelFacturaFrecuente.remove(lblPlacaFrecuente);
+						panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
+						panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
+						panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
+						panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
+						panelFacturaFrecuente.remove(lblRedencionPuntos);
+						panelFacturaFrecuente.remove(rdbtnRadioButton);
+						panelFacturaFrecuente.remove(lblNumeroARedimir);
+						panelFacturaFrecuente.remove(formattedTextFieldPuntos);
+						panelFacturaFrecuente.remove(lblDescuento);
+						panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
+						panelFacturaFrecuente.remove(textFieldDineroFrecuente);
+						panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
+						panelFacturaFrecuente.remove(buttonBackFactura);
+						remove(panelFacturaFrecuente);
+						JOptionPane.showMessageDialog(null, "Dinero Insufusciente");
+						facturaCF(v,cp);
+						}
+				}
+				
 			}
 			
 		});
@@ -980,179 +1018,8 @@ public class UISwing extends JFrame{
 				});
 	}
 	
-	private void setupPanelPrecios() {
-		this.panelPrecios = new JPanel();
-		GridBagLayout gridBagLayoutPrecios = new GridBagLayout();
-		gridBagLayoutPrecios.columnWidths = new int[]{0, 0, 0, 0, 0, 0, 175, 0, 0};
-		gridBagLayoutPrecios.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayoutPrecios.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, Double.MIN_VALUE};
-		gridBagLayoutPrecios.rowWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		this.panelPrecios.setLayout(gridBagLayoutPrecios);
-		
-		JLabel lblEditorPrecios = new JLabel("Precios actuales");
-		lblEditorPrecios.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_lblEditorPrecios = new GridBagConstraints();
-		gbc_lblEditorPrecios.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEditorPrecios.gridx = 4;
-		gbc_lblEditorPrecios.gridy = 0;
-		this.panelPrecios.add(lblEditorPrecios, gbc_lblEditorPrecios);
-		
-		JLabel lblPrecioCarro = new JLabel("Precio carro");
-		GridBagConstraints gbc_lblPrecioCarro = new GridBagConstraints();
-		gbc_lblPrecioCarro.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrecioCarro.gridx = 2;
-		gbc_lblPrecioCarro.gridy = 2;
-		this.panelPrecios.add(lblPrecioCarro, gbc_lblPrecioCarro);
-		
-		JFormattedTextField formattedTextField = new JFormattedTextField();
-		formattedTextField.setBackground(Color.WHITE);
-		GridBagConstraints gbc_formattedTextField = new GridBagConstraints();
-		gbc_formattedTextField.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedTextField.fill = GridBagConstraints.HORIZONTAL;
-		gbc_formattedTextField.gridx = 6;
-		gbc_formattedTextField.gridy = 2;
-		this.panelPrecios.add(formattedTextField, gbc_formattedTextField);
-		
-		JLabel lblPrecioMoto = new JLabel("Precio moto");
-		GridBagConstraints gbc_lblPrecioMoto = new GridBagConstraints();
-		gbc_lblPrecioMoto.insets = new Insets(0, 0, 5, 5);
-		gbc_lblPrecioMoto.gridx = 2;
-		gbc_lblPrecioMoto.gridy = 4;
-		this.panelPrecios.add(lblPrecioMoto, gbc_lblPrecioMoto);
-		
-		JFormattedTextField formattedTextField_1 = new JFormattedTextField();
-		GridBagConstraints gbc_formattedTextField_1 = new GridBagConstraints();
-		gbc_formattedTextField_1.insets = new Insets(0, 0, 5, 5);
-		gbc_formattedTextField_1.fill = GridBagConstraints.HORIZONTAL;
-		gbc_formattedTextField_1.gridx = 6;
-		gbc_formattedTextField_1.gridy = 4;
-		this.panelPrecios.add(formattedTextField_1, gbc_formattedTextField_1);
-		
-		JButton btnRealizarCambios = new JButton("Realizar cambios");
-		GridBagConstraints gbc_btnRealizarCambios = new GridBagConstraints();
-		gbc_btnRealizarCambios.insets = new Insets(0, 0, 0, 5);
-		gbc_btnRealizarCambios.gridx = 4;
-		gbc_btnRealizarCambios.gridy = 6;
-		this.panelPrecios.add(btnRealizarCambios, gbc_btnRealizarCambios);
-		
-		JButton buttonBackPrecios = new JButton("<-");
-		GridBagConstraints gbc_buttonBackPrecios = new GridBagConstraints();
-		gbc_buttonBackPrecios.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonBackPrecios.gridx = 0;
-		gbc_buttonBackPrecios.gridy = 0;
-		this.panelPrecios.add(buttonBackPrecios, gbc_buttonBackPrecios);
-		//listeners
-				btnRealizarCambios.addActionListener(new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						remove(panelPrecios);
-						JOptionPane.showMessageDialog(null, "Los nuevos precios han sido fijados");
-						showPanelMenu();
-						}
-						});
-				buttonBackPrecios.addActionListener(new ActionListener () {
-					public void actionPerformed (ActionEvent e) {
-						remove(panelPrecios);
-						showPanelMenu();
-						}
-						});
-				
-	}
-	private void setupPanelStats() {
-		this.panelStats = new JPanel();
-		setBackground(SystemColor.menu);
-		GridBagLayout gridBagLayoutStats = new GridBagLayout();
-		gridBagLayoutStats.columnWidths = new int[]{0, 18, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayoutStats.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
-		gridBagLayoutStats.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
-		gridBagLayoutStats.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
-		this.panelStats.setLayout(gridBagLayoutStats);
-		
-		JLabel lblEstadisticas = new JLabel("Estadisticas");
-		lblEstadisticas.setFont(new Font("Tahoma", Font.PLAIN, 15));
-		GridBagConstraints gbc_lblEstadisticas = new GridBagConstraints();
-		gbc_lblEstadisticas.insets = new Insets(0, 0, 5, 5);
-		gbc_lblEstadisticas.gridx = 3;
-		gbc_lblEstadisticas.gridy = 0;
-		this.panelStats.add(lblEstadisticas, gbc_lblEstadisticas);
-		
-		JLabel lblVehiculosIngresados = new JLabel("Vehiculos ingresados");
-		GridBagConstraints gbc_lblVehiculosIngresados = new GridBagConstraints();
-		gbc_lblVehiculosIngresados.insets = new Insets(0, 0, 5, 5);
-		gbc_lblVehiculosIngresados.gridx = 2;
-		gbc_lblVehiculosIngresados.gridy = 2;
-		this.panelStats.add(lblVehiculosIngresados, gbc_lblVehiculosIngresados);
-		
-		JTextArea textAreaVehiculosIngreso = new JTextArea();
-		textAreaVehiculosIngreso.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaVehiculosIngreso = new GridBagConstraints();
-		gbc_textAreaVehiculosIngreso.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaVehiculosIngreso.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textAreaVehiculosIngreso.gridx = 4;
-		gbc_textAreaVehiculosIngreso.gridy = 2;
-		this.panelStats.add(textAreaVehiculosIngreso, gbc_textAreaVehiculosIngreso);
-		
-		JLabel lblCarrosIngresados = new JLabel("Carros ingresados");
-		GridBagConstraints gbc_lblCarrosIngresados = new GridBagConstraints();
-		gbc_lblCarrosIngresados.insets = new Insets(0, 0, 5, 5);
-		gbc_lblCarrosIngresados.gridx = 2;
-		gbc_lblCarrosIngresados.gridy = 4;
-		this.panelStats.add(lblCarrosIngresados, gbc_lblCarrosIngresados);
-		
-		JTextArea textAreaCarrosIngreso = new JTextArea();
-		textAreaCarrosIngreso.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaCarrosIngreso = new GridBagConstraints();
-		gbc_textAreaCarrosIngreso.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaCarrosIngreso.fill = GridBagConstraints.BOTH;
-		gbc_textAreaCarrosIngreso.gridx = 4;
-		gbc_textAreaCarrosIngreso.gridy = 4;
-		this.panelStats.add(textAreaCarrosIngreso, gbc_textAreaCarrosIngreso);
-		
-		JLabel lblMotosIngresadas = new JLabel("Motos ingresadas");
-		GridBagConstraints gbc_lblMotosIngresadas = new GridBagConstraints();
-		gbc_lblMotosIngresadas.insets = new Insets(0, 0, 5, 5);
-		gbc_lblMotosIngresadas.gridx = 2;
-		gbc_lblMotosIngresadas.gridy = 6;
-		this.panelStats.add(lblMotosIngresadas, gbc_lblMotosIngresadas);
-		
-		JButton buttonBackStats = new JButton("<-");
-		GridBagConstraints gbc_buttonBackStats = new GridBagConstraints();
-		gbc_buttonBackStats.insets = new Insets(0, 0, 5, 5);
-		gbc_buttonBackStats.gridx = 0;
-		gbc_buttonBackStats.gridy = 0;
-		this.panelStats.add(buttonBackStats, gbc_buttonBackStats);
-		
-		JTextArea textAreaMotosIngreso = new JTextArea();
-		textAreaMotosIngreso.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaMotosIngreso = new GridBagConstraints();
-		gbc_textAreaMotosIngreso.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaMotosIngreso.fill = GridBagConstraints.BOTH;
-		gbc_textAreaMotosIngreso.gridx = 4;
-		gbc_textAreaMotosIngreso.gridy = 6;
-		this.panelStats.add(textAreaMotosIngreso, gbc_textAreaMotosIngreso);
-		
-		JLabel lblGananciasDa = new JLabel("Ganancias día");
-		GridBagConstraints gbc_lblGananciasDa = new GridBagConstraints();
-		gbc_lblGananciasDa.insets = new Insets(0, 0, 0, 5);
-		gbc_lblGananciasDa.gridx = 2;
-		gbc_lblGananciasDa.gridy = 8;
-		this.panelStats.add(lblGananciasDa, gbc_lblGananciasDa);
-		
-		JTextArea textAreaGanancias = new JTextArea();
-		textAreaGanancias.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaGanancias = new GridBagConstraints();
-		gbc_textAreaGanancias.insets = new Insets(0, 0, 0, 5);
-		gbc_textAreaGanancias.fill = GridBagConstraints.BOTH;
-		gbc_textAreaGanancias.gridx = 4;
-		gbc_textAreaGanancias.gridy = 8;
-		this.panelStats.add(textAreaGanancias, gbc_textAreaGanancias);
-		//listeners
-		buttonBackStats.addActionListener(new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
-				remove(panelStats);
-				showPanelMenu();
-				}
-				});
-	}
+	
+	
 	
 	
 	private void setupPanelRegistro() {
@@ -1372,9 +1239,7 @@ public class UISwing extends JFrame{
 				showPanelMenu();
 				
 				}
-				});
-					
-		
+				});		
 	}
 	
 	
@@ -1404,10 +1269,6 @@ public class UISwing extends JFrame{
 	}*/
 	public void showPanelFacturaFrecuente() {
 		this.add(this.panelFacturaFrecuente);
-		this.pack();
-	}
-	public void showPanelPrecios() {
-		this.add(this.panelPrecios);
 		this.pack();
 	}
 	public void showPanelStats() {

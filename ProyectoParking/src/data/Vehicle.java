@@ -17,7 +17,7 @@ public class Vehicle implements Comparable<Vehicle>{
 		this.placa = placa;
 	}
 	
-	public int getPrice(int minutes) {
+	public int getPrice(int seconds) {
 		return 0;
 	}
 	

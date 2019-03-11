@@ -15,7 +15,7 @@ public class Execute {
 		cmr = new ClientesManager(); 
 		uiSwing = new UISwing(pmr,cmr);
 		File tmpDir = new File("clientes");
-		if(tmpDir.exists()) cmr.loadContacts();
+		if(tmpDir.exists()) cmr.loadClients();
 		uiSwing.showPanelMenu();
 
 		

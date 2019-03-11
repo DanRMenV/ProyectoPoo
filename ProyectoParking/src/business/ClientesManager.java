@@ -45,7 +45,7 @@ public class ClientesManager {
 		return null;
 	}
 	
-	public void saveContacts() {
+	public void saveClients() {
 		try {
 			FileOutputStream fileOut =
 					new FileOutputStream(this.filePath);
@@ -59,7 +59,7 @@ public class ClientesManager {
 		}
 	}
 
-	public void loadContacts() {
+	public void loadClients() {
 		System.out.println("loading contacts");
 		try {
 			final FileInputStream fileIn =

@@ -9,8 +9,8 @@ public class Car extends Vehicle{
 	
 	
 	@Override
-	public int getPrice(int minutes) {
-		return minutes*60*90;		
+	public int getPrice(int seconds) {
+		return seconds*90;		
 	}
 	
 	@Override

@@ -8,7 +8,7 @@ public class Cliente_Parking extends Persona{
 		return puntos;
 	}
 	public void setPuntos(int puntos) {
-		this.puntos = puntos;
+		this.puntos= this.puntos+ puntos;
 	}
 	public String getPlaca() {
 		return placa;

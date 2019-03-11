@@ -9,8 +9,8 @@ public class Motorcycle extends Vehicle {
 	
 	
 	@Override
-	public int getPrice(int minutes) {
-		return minutes*60*50;		
+	public int getPrice(int seconds) {
+		return seconds*50;		
 	}
 	
 	@Override
