@@ -344,10 +344,10 @@ public class UISwing extends JFrame{
 				LocalDateTime l=LocalDateTime.now();
 				String tipo=(String) comboBoxTipoV.getSelectedItem();
 				if(tipo.equals("Moto")){
-					Motorcycle m = new Motorcycle(txtPlaca.getText(), txtMarca.getText());
+					Motorcycle m = new Motorcycle( txtMarca.getText(),txtPlaca.getText());
 					pm.addVehicle(m,l);
 				}else {
-					Car c = new Car(txtPlaca.getText(), txtMarca.getText());
+					Car c = new Car(txtMarca.getText(),txtPlaca.getText());
 					pm.addVehicle(c,l);
 				}	
 				txtPlaca.setText("");
@@ -411,7 +411,7 @@ public class UISwing extends JFrame{
 		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
 		Object[][] rows = new Object[tabla.size()][4];
-		 String[] cabeza={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
+		 String[] cabeza={ "Placa", "Marca", "Tipo Vehículo", "Tiempo (minutos)"};
 		 int i=0;
 		 for(Map.Entry<Vehicle,LocalDateTime> entry : tabla.entrySet()) {
 				Vehicle key = entry.getKey(); 
@@ -527,7 +527,7 @@ public class UISwing extends JFrame{
 			this.panelPagos.add(scrollPanePagos, gbc_scrollPanePagos);
 			
 			Object[][] rows = new Object[tablaP.size()][4];
-			 String[] cabezal={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
+			 String[] cabezal={"Placa","Marca", "Tipo Vehículo", "Tiempo (minutos)"};
 			 int i=0;
 			 for(Map.Entry<Vehicle,LocalDateTime> entry : tablaP.entrySet()) {
 					Vehicle key = entry.getKey(); 
@@ -894,9 +894,8 @@ public class UISwing extends JFrame{
 				panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
 				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
-				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
-
-				
+				cp.setPuntos(5);
+				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");				
 				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
