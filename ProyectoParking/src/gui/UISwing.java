@@ -1123,18 +1123,33 @@ public class UISwing extends JFrame{
 		this.panelRegistro.add(textFieldNombre, gbc_textFieldNombre);
 		textFieldNombre.setColumns(10);
 		
+		JLabel lblApellido = new JLabel("Apellido");
+		GridBagConstraints gbc_lblApellido = new GridBagConstraints();
+		gbc_lblApellido.insets = new Insets(0, 0, 5, 5);
+		gbc_lblApellido.gridx = 1;
+		gbc_lblApellido.gridy = 5;
+		this.panelRegistro.add(lblApellido, gbc_lblApellido);
+		
+		JTextField textFieldApellido = new JTextField();
+		GridBagConstraints gbc_textFieldApellido = new GridBagConstraints();
+		gbc_textFieldApellido.insets = new Insets(0, 0, 5, 0);
+		gbc_textFieldApellido.gridx = 3;
+		gbc_textFieldApellido.gridy = 5;
+		this.panelRegistro.add(textFieldApellido, gbc_textFieldApellido);
+		textFieldApellido.setColumns(10);
+		
 		JLabel lblPlacaVehculo = new JLabel("Placa Veh\u00EDculo");
 		GridBagConstraints gbc_lblPlacaVehculo = new GridBagConstraints();
 		gbc_lblPlacaVehculo.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPlacaVehculo.gridx = 1;
-		gbc_lblPlacaVehculo.gridy = 5;
+		gbc_lblPlacaVehculo.gridy = 7;
 		this.panelRegistro.add(lblPlacaVehculo, gbc_lblPlacaVehculo);
 		
 		JTextField textFieldPlacaVehiculo = new JTextField();
 		GridBagConstraints gbc_textFieldPlacaVehiculo = new GridBagConstraints();
 		gbc_textFieldPlacaVehiculo.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPlacaVehiculo.gridx = 3;
-		gbc_textFieldPlacaVehiculo.gridy = 5;
+		gbc_textFieldPlacaVehiculo.gridy = 7;
 		this.panelRegistro.add(textFieldPlacaVehiculo, gbc_textFieldPlacaVehiculo);
 		textFieldPlacaVehiculo.setColumns(10);
 		
@@ -1142,14 +1157,14 @@ public class UISwing extends JFrame{
 		GridBagConstraints gbc_lblNmeroDeCdula = new GridBagConstraints();
 		gbc_lblNmeroDeCdula.insets = new Insets(0, 0, 5, 5);
 		gbc_lblNmeroDeCdula.gridx = 1;
-		gbc_lblNmeroDeCdula.gridy = 7;
+		gbc_lblNmeroDeCdula.gridy = 9;
 		this.panelRegistro.add(lblNmeroDeCdula, gbc_lblNmeroDeCdula);
 		
 		JTextField textFieldCC = new JTextField();
 		GridBagConstraints gbc_textFieldCC = new GridBagConstraints();
 		gbc_textFieldCC.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldCC.gridx = 3;
-		gbc_textFieldCC.gridy = 7;
+		gbc_textFieldCC.gridy = 9;
 		this.panelRegistro.add(textFieldCC, gbc_textFieldCC);
 		textFieldCC.setColumns(10);
 		
@@ -1157,14 +1172,14 @@ public class UISwing extends JFrame{
 		GridBagConstraints gbc_btnRegistro = new GridBagConstraints();
 		gbc_btnRegistro.insets = new Insets(0, 0, 0, 5);
 		gbc_btnRegistro.gridx = 2;
-		gbc_btnRegistro.gridy = 9;
+		gbc_btnRegistro.gridy = 11;
 		this.panelRegistro.add(btnRegistro, gbc_btnRegistro);
 		
 		JButton btnVerClientes = new JButton("Ver clientes");
 		GridBagConstraints gbc_btnVerClientes = new GridBagConstraints();
 		gbc_btnVerClientes.insets = new Insets(0, 0, 0, 5);
 		gbc_btnVerClientes.gridx = 2;
-		gbc_btnVerClientes.gridy = 11;
+		gbc_btnVerClientes.gridy = 13;
 		this.panelRegistro.add(btnVerClientes, gbc_btnVerClientes);
 		
 		//listeners
