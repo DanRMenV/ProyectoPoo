@@ -1126,11 +1126,16 @@ public class UISwing extends JFrame{
 						});
 				btnRegistro.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-						remove(panelRegistro);
+						textFieldNombre.setText("");
+						textFieldPlacaVehiculo.setText("");	
+						textFieldCC.setText("");
+						System.out.println(cm);
 						JOptionPane.showMessageDialog(null, "El usuario ha sido registrado correctamente");
+						remove(panelIngreso);
 						showPanelMenu();
-						}
-						});
+							}
+						});	
+						
 				btnVerClientes.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						remove(panelRegistro);
