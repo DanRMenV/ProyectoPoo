@@ -20,6 +20,7 @@ import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
+import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -56,6 +57,7 @@ public class UISwing extends JFrame{
 	private JPanel panelRegistro;
 	private JPanel panelFactura;
 	private JPanel panelFacturaFrecuente;
+	private JPanel panelClientes;
 	
 	
 	private ParkingManager pm;
@@ -87,6 +89,7 @@ public class UISwing extends JFrame{
 		this.setupPanelPrecios();
 		this.setupPanelStats();
 		this.setupPanelRegistro();
+		this.setupPanelClientes();
 	}
 	
 	//Setup menu
@@ -1223,15 +1226,18 @@ public class UISwing extends JFrame{
 		textFieldCC.setColumns(10);
 		
 		JButton btnRegistro = new JButton("Registrar");
-		btnRegistro.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-			}
-		});
 		GridBagConstraints gbc_btnRegistro = new GridBagConstraints();
 		gbc_btnRegistro.insets = new Insets(0, 0, 0, 5);
 		gbc_btnRegistro.gridx = 2;
 		gbc_btnRegistro.gridy = 9;
 		this.panelRegistro.add(btnRegistro, gbc_btnRegistro);
+		
+		JButton btnVerClientes = new JButton("Ver clientes");
+		GridBagConstraints gbc_btnVerClientes = new GridBagConstraints();
+		gbc_btnVerClientes.insets = new Insets(0, 0, 0, 5);
+		gbc_btnVerClientes.gridx = 2;
+		gbc_btnVerClientes.gridy = 11;
+		this.panelRegistro.add(btnVerClientes, gbc_btnVerClientes);
 		
 		//listeners
 				buttonBack.addActionListener(new ActionListener () {
@@ -1247,9 +1253,100 @@ public class UISwing extends JFrame{
 						showPanelMenu();
 						}
 						});
+				btnVerClientes.addActionListener(new ActionListener () {
+					public void actionPerformed (ActionEvent e) {
+						remove(panelRegistro);
+						showPanelClientes();
+						}
+						});
 		
 
 	}
+	
+	private void setupPanelClientes() {
+		this.panelClientes = new JPanel();
+		GridBagLayout gridBagLayoutClientes = new GridBagLayout();
+		gridBagLayoutClientes.columnWidths = new int[]{0, 30, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutClientes.rowHeights = new int[]{0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0};
+		gridBagLayoutClientes.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, Double.MIN_VALUE};
+		gridBagLayoutClientes.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
+		this.panelClientes.setLayout(gridBagLayoutClientes);
+		
+		//final JTable  tablePagos;
+		JLabel lblClientes = new JLabel("Clientes");
+		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 15));
+		GridBagConstraints gbc_lblClientes = new GridBagConstraints();
+		gbc_lblClientes.insets = new Insets(0, 0, 5, 5);
+		gbc_lblClientes.gridx = 5;
+		gbc_lblClientes.gridy = 1;
+		this.panelClientes.add(lblClientes, gbc_lblClientes);
+	}
+	
+	public void showClients(TreeSet<Cliente_Parking> tablaclientes) {
+		final JTable  tableClientes;
+		JScrollPane scrollPaneClientes = new JScrollPane();
+		JButton buttonBackClientes = new JButton("<-");
+		JLabel lblNoAutoClientes = new JLabel("No hay clientes!");
+		
+		GridBagConstraints gbc_buttonBackClientes = new GridBagConstraints();
+		gbc_buttonBackClientes.insets = new Insets(0, 0, 5, 5);
+		gbc_buttonBackClientes.gridx = 0;
+		gbc_buttonBackClientes.gridy = 0;
+		this.panelClientes.add(buttonBackClientes, gbc_buttonBackClientes);
+		
+		/*if(tablaclientes.size()>0) {
+		
+			GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
+		gbc_scrollPaneClientes.gridwidth = 7;
+		gbc_scrollPaneClientes.insets = new Insets(0, 0, 5, 5);
+		gbc_scrollPaneClientes.fill = GridBagConstraints.BOTH;
+		gbc_scrollPaneClientes.gridx = 1;
+		gbc_scrollPaneClientes.gridy = 4;
+		this.panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
+		
+		Object[][] rows = new Object[tablaclientes.size()][4];
+		 String[] cabeza={"Nombre", "Apellido", "Número de cédula", "Placa"};
+		 int i=0;
+		 for( Iterator<Cliente_Parking> it = tablaclientes.iterator(); it.hasNext();) {
+			 Cliente_Parking cp = cp.getPlaca() ;				
+				rows[i][0]=cp.getNombre();
+				rows[i][1]=cp.getApellido();
+				rows[i][2]=cp.getCedula();
+				rows[i][3]=cp.getPlaca();
+				i++;
+		}	 
+		 
+		tableClientes = new JTable(rows,cabeza);
+		scrollPaneClientes.setViewportView(tableClientes);
+		}else {
+			
+			lblNoAutoClientes.setFont(new Font("Tahoma", Font.PLAIN, 15));
+			GridBagConstraints gbc_lblClientes = new GridBagConstraints();
+			gbc_lblClientes.insets = new Insets(0, 0, 5, 5);
+			gbc_lblClientes.gridx = 5;
+			gbc_lblClientes.gridy = 5;
+			this.panelEstado.add(lblNoAutoClientes, gbc_lblClientes);
+		}
+		
+		this.add(this.panelClientes);
+		this.pack();
+		
+				//listeners
+		buttonBackClientes.addActionListener(new ActionListener () {
+			public void actionPerformed (ActionEvent e) {
+				panelClientes.remove(buttonBackClientes);
+				panelClientes.remove(scrollPaneClientes);
+				panelClientes.remove(lblNoAutoClientes);
+				
+				remove(panelClientes);
+				showPanelMenu();
+				
+				}
+				});
+				*/	
+		
+	}
+	
 	
 	public void showPanelMenu() {
 		this.setSize(400, 210);
@@ -1289,6 +1386,10 @@ public class UISwing extends JFrame{
 	}
 	public void showPanelRegistro() {
 		this.add(this.panelRegistro);
+		this.pack();
+	}
+	public void showPanelClientes() {
+		this.add(this.panelClientes);
 		this.pack();
 	}
 	
