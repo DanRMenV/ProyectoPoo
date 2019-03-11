@@ -1245,7 +1245,7 @@ public class UISwing extends JFrame{
 		gbc_buttonBackClientes.gridy = 0;
 		this.panelClientes.add(buttonBackClientes, gbc_buttonBackClientes);
 		
-		/*if(tablaclientes.size()>0) {
+		if(tablaclientes.size()>0) {
 		
 			GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
 		gbc_scrollPaneClientes.gridwidth = 7;
@@ -1259,7 +1259,7 @@ public class UISwing extends JFrame{
 		 String[] cabeza={"Nombre", "Apellido", "Número de cédula", "Placa"};
 		 int i=0;
 		 for( Iterator<Cliente_Parking> it = tablaclientes.iterator(); it.hasNext();) {
-			 Cliente_Parking cp = cp.getPlaca() ;				
+			 Cliente_Parking cp = cp.();				
 				rows[i][0]=cp.getNombre();
 				rows[i][1]=cp.getApellido();
 				rows[i][2]=cp.getCedula();
@@ -1276,7 +1276,7 @@ public class UISwing extends JFrame{
 			gbc_lblClientes.insets = new Insets(0, 0, 5, 5);
 			gbc_lblClientes.gridx = 5;
 			gbc_lblClientes.gridy = 5;
-			this.panelEstado.add(lblNoAutoClientes, gbc_lblClientes);
+			this.panelClientes.add(lblNoAutoClientes, gbc_lblClientes);
 		}
 		
 		this.add(this.panelClientes);
@@ -1294,7 +1294,7 @@ public class UISwing extends JFrame{
 				
 				}
 				});
-				*/	
+					
 		
 	}
 	
