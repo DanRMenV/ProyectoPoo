@@ -416,11 +416,15 @@ public class UISwing extends JFrame{
 		 for(Map.Entry<Vehicle,LocalDateTime> entry : tabla.entrySet()) {
 				Vehicle key = entry.getKey(); 
 				LocalDateTime value = entry.getValue();
-				
+				int hours  = value.getHour();
+				int minutes = value.getMinute();
+				int seconds = value.getSecond();
+				String Hora = (""+ hours+":"+minutes+":"+seconds);			
+					
 				rows[i][0]=key.getPlaca();
 				rows[i][1]=key.getMarca();
 				rows[i][2]=key.getNameClass();
-				rows[i][3]=value;
+				rows[i][3]=Hora;
 				i++;
 		}		 
 		 
@@ -532,10 +536,14 @@ public class UISwing extends JFrame{
 			 for(Map.Entry<Vehicle,LocalDateTime> entry : tablaP.entrySet()) {
 					Vehicle key = entry.getKey(); 
 					LocalDateTime value = entry.getValue();	
+					int hours  = value.getHour();
+					int minutes = value.getMinute();
+					int seconds = value.getSecond();
+					String HoraPago = (""+ hours+":"+minutes+":"+seconds);
 					rows[i][0]=key.getPlaca();
 					rows[i][1]=key.getMarca();
 					rows[i][2]=key.getNameClass();
-					rows[i][3]=value;
+					rows[i][3]=HoraPago;
 					i++;
 			}		 
 			 
@@ -630,8 +638,12 @@ public class UISwing extends JFrame{
 		gbc_lblHoraEntrada.gridy = 6;
 		this.panelFactura.add(lblHoraEntrada, gbc_lblHoraEntrada);
 		
-		LocalDateTime horaAct=LocalDateTime.now();
-		JLabel lblHoraSalida = new JLabel("Hora Salida: "+ horaAct);
+		LocalDateTime localDate = LocalDateTime.now();
+		int hours  = localDate.getHour();
+		int minutos = localDate.getMinute();
+		int seconds = localDate.getSecond();
+		String horaFactura = (""+ hours+":"+minutos+":"+seconds);
+		JLabel lblHoraSalida = new JLabel("Hora Salida: "+ horaFactura);
 		GridBagConstraints gbc_lblHoraSalida = new GridBagConstraints();
 		gbc_lblHoraSalida.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraSalida.gridx = 1;
@@ -779,8 +791,12 @@ public class UISwing extends JFrame{
 		gbc_lblHoraEntradaFrecuente.gridy = 8;
 		this.panelFacturaFrecuente.add(lblHoraEntradaFrecuente, gbc_lblHoraEntradaFrecuente);
 		
-		LocalDateTime horaAct=LocalDateTime.now();
-		JLabel lblHoraSalidaFrecuente = new JLabel("Hora Salida: "+ horaAct);
+		LocalDateTime localDate = LocalDateTime.now();
+		int hours  = localDate.getHour();
+		int minutes = localDate.getMinute();
+		int seconds = localDate.getSecond();
+		String horaFacturaCF = (""+ hours+":"+minutes+":"+seconds);
+		JLabel lblHoraSalidaFrecuente = new JLabel("Hora Salida: "+ horaFacturaCF);
 		GridBagConstraints gbc_lblHoraSalidaFrecuente = new GridBagConstraints();
 		gbc_lblHoraSalidaFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraSalidaFrecuente.gridx = 1;
