@@ -823,7 +823,7 @@ public class UISwing extends JFrame{
 		gbc_lblNumeroARedimir.gridy = 18;
 		this.panelFacturaFrecuente.add(lblNumeroARedimir, gbc_lblNumeroARedimir);
 		
-		JFormattedTextField formattedTextFieldPuntos = new JFormattedTextField("");
+		JFormattedTextField formattedTextFieldPuntos = new JFormattedTextField("0");
 		GridBagConstraints gbc_formattedTextFieldPuntos = new GridBagConstraints();
 		gbc_formattedTextFieldPuntos.insets = new Insets(0, 0, 5, 0);
 		gbc_formattedTextFieldPuntos.fill = GridBagConstraints.HORIZONTAL;
@@ -876,7 +876,7 @@ public class UISwing extends JFrame{
 				
 				int punt=Integer.parseInt(formattedTextFieldPuntos.getText());
 				
-				if(punt<cp.getPuntos()) {
+				if(punt<=cp.getPuntos()) {
 				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
 				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
 				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
