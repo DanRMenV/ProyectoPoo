@@ -16,6 +16,7 @@ import java.awt.event.ActionListener;
 import java.awt.geom.Dimension2D;
 import java.sql.Date;
 import java.text.DateFormat;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -40,6 +41,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
+import javax.swing.text.MaskFormatter;
 
 import business.*;
 import data.*;
@@ -196,6 +198,7 @@ public class UISwing extends JFrame{
 					showPanelRegistro();
 				}
 				});
+			
 			btnPagos.addActionListener(new ActionListener () {
 				public void actionPerformed (ActionEvent e) {
 					remove(panelMenu);
@@ -256,8 +259,16 @@ public class UISwing extends JFrame{
 		gbc_lblPlaca.gridx = 2;
 		gbc_lblPlaca.gridy = 2;
 		this.panelIngreso.add(lblPlaca, gbc_lblPlaca);
+	
 		
-		final JTextField txtPlaca = new JTextField();
+		MaskFormatter mask = null;
+        try {
+            mask = new MaskFormatter("UUU-###");
+            mask.setPlaceholderCharacter('_');
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        JFormattedTextField txtPlaca = new JFormattedTextField(mask);
 		txtPlaca.setHorizontalAlignment(SwingConstants.LEFT);
 		GridBagConstraints gbc_txtPlaca = new GridBagConstraints();
 		gbc_txtPlaca.insets = new Insets(0, 0, 5, 0);
@@ -354,6 +365,7 @@ public class UISwing extends JFrame{
 			
 		});*/
 	}
+
 	
 	private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
@@ -1145,7 +1157,14 @@ public class UISwing extends JFrame{
 		gbc_lblPlacaVehculo.gridy = 7;
 		this.panelRegistro.add(lblPlacaVehculo, gbc_lblPlacaVehculo);
 		
-		JTextField textFieldPlacaVehiculo = new JTextField();
+		MaskFormatter mask = null;
+        try {
+            mask = new MaskFormatter("UUU-###");
+            mask.setPlaceholderCharacter('_');
+        } catch (ParseException e) {
+            e.printStackTrace();
+        }
+        JFormattedTextField textFieldPlacaVehiculo = new JFormattedTextField(mask);
 		GridBagConstraints gbc_textFieldPlacaVehiculo = new GridBagConstraints();
 		gbc_textFieldPlacaVehiculo.insets = new Insets(0, 0, 5, 0);
 		gbc_textFieldPlacaVehiculo.gridx = 3;
@@ -1191,12 +1210,12 @@ public class UISwing extends JFrame{
 						});
 				btnRegistro.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
-
 						Cliente_Parking c=new Cliente_Parking(textFieldCC.getText(),textFieldNombre.getText(),textFieldApellido.getText(),0,textFieldPlacaVehiculo.getText());
 						remove(panelRegistro);
 						textFieldNombre.setText("");
 						textFieldPlacaVehiculo.setText("");	
 						textFieldCC.setText("");
+						textFieldApellido.setText("");
 						cm.addCliente(c);
 						JOptionPane.showMessageDialog(null, "El usuario ha sido registrado correctamente");
 						remove(panelIngreso);
@@ -1207,7 +1226,7 @@ public class UISwing extends JFrame{
 				btnVerClientes.addActionListener(new ActionListener () {
 					public void actionPerformed (ActionEvent e) {
 						remove(panelRegistro);
-						showPanelClientes();
+						showClients(cm.getClientes());
 						}
 						});
 		
@@ -1245,9 +1264,9 @@ public class UISwing extends JFrame{
 		gbc_buttonBackClientes.gridy = 0;
 		this.panelClientes.add(buttonBackClientes, gbc_buttonBackClientes);
 		
-		if(tablaclientes.size()>0) {
 		
-			GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
+		if(tablaclientes.size()>0) {
+		GridBagConstraints gbc_scrollPaneClientes = new GridBagConstraints();
 		gbc_scrollPaneClientes.gridwidth = 7;
 		gbc_scrollPaneClientes.insets = new Insets(0, 0, 5, 5);
 		gbc_scrollPaneClientes.fill = GridBagConstraints.BOTH;
@@ -1255,17 +1274,17 @@ public class UISwing extends JFrame{
 		gbc_scrollPaneClientes.gridy = 4;
 		this.panelClientes.add(scrollPaneClientes, gbc_scrollPaneClientes);
 		
-		Object[][] rows = new Object[tablaclientes.size()][4];
+		 Object[][] rows = new Object[tablaclientes.size()][4];
 		 String[] cabeza={"Nombre", "Apellido", "Número de cédula", "Placa"};
 		 int i=0;
-		 for( Iterator<Cliente_Parking> it = tablaclientes.iterator(); it.hasNext();) {
-			 Cliente_Parking cp = cp.();				
-				rows[i][0]=cp.getNombre();
-				rows[i][1]=cp.getApellido();
-				rows[i][2]=cp.getCedula();
-				rows[i][3]=cp.getPlaca();
+			 
+		 for(Cliente_Parking c: tablaclientes) {
+			 	rows[i][0]=c.getNombre();
+				rows[i][1]=c.getApellido();
+				rows[i][2]=c.getCedula();
+				rows[i][3]=c.getPlaca();
 				i++;
-		}	 
+		 }
 		 
 		tableClientes = new JTable(rows,cabeza);
 		scrollPaneClientes.setViewportView(tableClientes);
@@ -1339,10 +1358,10 @@ public class UISwing extends JFrame{
 		this.add(this.panelRegistro);
 		this.pack();
 	}
-	public void showPanelClientes() {
+	/*public void showPanelClientes() {
 		this.add(this.panelClientes);
 		this.pack();
-	}
+	}*/
 	
 	
 	
