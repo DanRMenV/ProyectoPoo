@@ -795,8 +795,8 @@ public class UISwing extends JFrame{
 		int hours  = localDate.getHour();
 		int minutes = localDate.getMinute();
 		int seconds = localDate.getSecond();
-		String horaFacturaCF = (""+ hours+":"+minutes+":"+seconds);
-		JLabel lblHoraSalidaFrecuente = new JLabel("Hora Salida: "+ horaFacturaCF);
+		String horaFacturaC = (""+ hours+":"+minutes+":"+seconds);
+		JLabel lblHoraSalidaFrecuente = new JLabel("Hora Salida: "+ horaFacturaC);
 		GridBagConstraints gbc_lblHoraSalidaFrecuente = new GridBagConstraints();
 		gbc_lblHoraSalidaFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraSalidaFrecuente.gridx = 1;
