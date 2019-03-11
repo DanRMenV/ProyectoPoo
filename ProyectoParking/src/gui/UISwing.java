@@ -872,6 +872,10 @@ public class UISwing extends JFrame{
 		//listeners
 		btnRealizarPagoFrecuente.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
+				
+				int punt=Integer.parseInt(formattedTextFieldPuntos.getText());
+				
+				if(punt<cp.getPuntos()) {
 				panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
 				panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
 				panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
@@ -891,9 +895,37 @@ public class UISwing extends JFrame{
 				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+
+				
+				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
-				});
+				else {
+					panelFacturaFrecuente.remove(lblPagoParkingFrecuente);
+					panelFacturaFrecuente.remove(lblPuntosClienteFrecuente);
+					panelFacturaFrecuente.remove(lblTipoVehiculoFrecuente);
+					panelFacturaFrecuente.remove(lblPlacaFrecuente);
+					panelFacturaFrecuente.remove(lblHoraEntradaFrecuente);
+					panelFacturaFrecuente.remove(lblHoraSalidaFrecuente);
+					panelFacturaFrecuente.remove(lblTiempominutosFrecuente);
+					panelFacturaFrecuente.remove(lblPrecioTotalFrecuente);
+					panelFacturaFrecuente.remove(lblRedencionPuntos);
+					panelFacturaFrecuente.remove(rdbtnRadioButton);
+					panelFacturaFrecuente.remove(lblNumeroARedimir);
+					panelFacturaFrecuente.remove(formattedTextFieldPuntos);
+					panelFacturaFrecuente.remove(lblDescuento);
+					panelFacturaFrecuente.remove(lblDineroIngresadoFrecuente);
+					panelFacturaFrecuente.remove(textFieldDineroFrecuente);
+					panelFacturaFrecuente.remove(btnRealizarPagoFrecuente);
+					panelFacturaFrecuente.remove(buttonBackFactura);
+					remove(panelFacturaFrecuente);
+					JOptionPane.showMessageDialog(null, "Datos incorrectos. Intente nuevamente");
+					facturaCF(v,cp);
+					
+				}
+			}
+			
+		});
 		
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -1149,6 +1181,7 @@ public class UISwing extends JFrame{
 		gbc_textFieldApellido.gridy = 5;
 		this.panelRegistro.add(textFieldApellido, gbc_textFieldApellido);
 		textFieldApellido.setColumns(10);
+		
 		
 		JLabel lblPlacaVehculo = new JLabel("Placa Veh\u00EDculo");
 		GridBagConstraints gbc_lblPlacaVehculo = new GridBagConstraints();
