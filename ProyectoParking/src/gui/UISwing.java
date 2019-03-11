@@ -930,7 +930,7 @@ public class UISwing extends JFrame{
 		gbc_textAreaDescuento.gridy = 20;
 		this.panelFacturaFrecuente.add(textAreaDescuento, gbc_textAreaDescuento);	
 		
-		JLabel lblDineroIngresadoFrecuente = new JLabel("Dinero ingresado");
+		JLabel lblDineroIngresadoFrecuente = new JLabel("Dinero ingresado: ");
 		GridBagConstraints gbc_lblDineroIngresadoFrecuente = new GridBagConstraints();
 		gbc_lblDineroIngresadoFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblDineroIngresadoFrecuente.gridx = 1;
