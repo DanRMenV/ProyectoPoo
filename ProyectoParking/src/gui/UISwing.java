@@ -550,11 +550,14 @@ public class UISwing extends JFrame{
 					String placa=(String) tablePagos.getValueAt(row, 0);
 					Vehicle v=pm.searchVehicle(placa);
 					
+					Cliente_Parking c =cm.searchClient(placa);
 					
-					//showPanelFacturaFrecuente();
-					
-					facturaN(v);
-					
+					if(c!=null) {
+						facturaCF(v,c);
+					}else {
+						facturaN(v);
+					}
+								
 					remove(panelPagos);
 					
 			
@@ -681,7 +684,6 @@ public class UISwing extends JFrame{
 		buttonBackFactura.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				remove(panelFactura);
-				//showPanelPagos();
 				payCars(pm.getVehicles());
 				}
 				});
@@ -704,7 +706,6 @@ public class UISwing extends JFrame{
 		gridBagLayoutFacturaFrecuente.columnWeights = new double[]{0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		gridBagLayoutFacturaFrecuente.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelFacturaFrecuente.setLayout(gridBagLayoutFacturaFrecuente);
-		
 		
 		}
 	
