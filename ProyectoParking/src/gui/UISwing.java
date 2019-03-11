@@ -555,7 +555,8 @@ public class UISwing extends JFrame{
 		//listeners
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-					if(tablePagos.getSelectedRow()!=-1) {
+					
+				if(tablePagos.getSelectedRow()!=-1) {
 					panelPagos.remove(buttonBackPagos);
 					panelPagos.remove(scrollPanePagos);
 					
@@ -568,8 +569,7 @@ public class UISwing extends JFrame{
 						facturaCF(v,c);
 					}else {
 						facturaN(v);
-					}
-								
+					}				
 					remove(panelPagos);
 			}		
 			
@@ -823,7 +823,7 @@ public class UISwing extends JFrame{
 		gbc_lblNumeroARedimir.gridy = 18;
 		this.panelFacturaFrecuente.add(lblNumeroARedimir, gbc_lblNumeroARedimir);
 		
-		JFormattedTextField formattedTextFieldPuntos = new JFormattedTextField();
+		JFormattedTextField formattedTextFieldPuntos = new JFormattedTextField("");
 		GridBagConstraints gbc_formattedTextFieldPuntos = new GridBagConstraints();
 		gbc_formattedTextFieldPuntos.insets = new Insets(0, 0, 5, 0);
 		gbc_formattedTextFieldPuntos.fill = GridBagConstraints.HORIZONTAL;
@@ -868,7 +868,8 @@ public class UISwing extends JFrame{
 		gbc_buttonBackFactura.gridy = 0;
 		this.panelFacturaFrecuente.add(buttonBackFactura, gbc_buttonBackFactura);
 		
-				
+		this.add(this.panelFacturaFrecuente);
+		this.pack();		
 		//listeners
 		btnRealizarPagoFrecuente.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
