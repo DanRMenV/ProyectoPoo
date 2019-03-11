@@ -1276,7 +1276,7 @@ public class UISwing extends JFrame{
 		final JTable  tableClientes;
 		JScrollPane scrollPaneClientes = new JScrollPane();
 		JButton buttonBackClientes = new JButton("<-");
-		JLabel lblNoAutoClientes = new JLabel("No hay clientes");
+		JLabel lblNoAutoClientes = new JLabel("No hay clientes!");
 		
 		GridBagConstraints gbc_buttonBackClientes = new GridBagConstraints();
 		gbc_buttonBackClientes.insets = new Insets(0, 0, 5, 5);
