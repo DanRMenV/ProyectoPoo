@@ -1,6 +1,5 @@
 package gui;
 
-
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Color;
@@ -41,7 +40,7 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 import javax.swing.table.DefaultTableModel;
 
-import business.ParkingManager;
+import business.*;
 import data.*;
 
 public class UISwing extends JFrame{
@@ -60,9 +59,11 @@ public class UISwing extends JFrame{
 	
 	
 	private ParkingManager pm;
+	private ClientesManager cm;
 	
-	public UISwing(ParkingManager pm) {
+	public UISwing(ParkingManager pm, ClientesManager cm) {
 		this.pm=pm;
+		this.cm=cm;
 		this.setTitle("Parking Manager");
 		this.setSize(400,300);
 		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

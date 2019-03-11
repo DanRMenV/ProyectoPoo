@@ -1,6 +1,6 @@
 package data;
 
-public class Persona {
+public class Persona implements Comparable<Persona>{
 	private String cedula;
 	private String nombre;
 	private String apellido;
@@ -29,6 +29,10 @@ public class Persona {
 		this.cedula = cedula;
 		this.nombre = nombre;
 		this.apellido = apellido;
+	}
+	@Override
+	public int compareTo(Persona other) {
+		return this.cedula.compareTo(other.cedula);
 	}
 	
 	
