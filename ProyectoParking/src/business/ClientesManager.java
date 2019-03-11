@@ -5,9 +5,13 @@ import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.ObjectInputStream;
 import java.io.ObjectOutputStream;
+import java.time.LocalDateTime;
+import java.util.Iterator;
+import java.util.Map;
 import java.util.TreeSet;
 
 import data.Cliente_Parking;
+import data.Vehicle;
 
 public class ClientesManager {
 	private TreeSet<Cliente_Parking> clientes;
@@ -30,6 +34,15 @@ public class ClientesManager {
 		
 	public void addCliente(Cliente_Parking c) {
 		this.clientes.add(c);
+	}
+	public Cliente_Parking searchClient(String placa) {
+		for( Iterator<Cliente_Parking> it = clientes.iterator(); it.hasNext();) {
+			Cliente_Parking cp = (Cliente_Parking)it.next(); 
+			if(cp.getPlaca().equals(placa)) {
+				return cp;
+			}	
+		}
+		return null;
 	}
 	
 	public void saveContacts() {
