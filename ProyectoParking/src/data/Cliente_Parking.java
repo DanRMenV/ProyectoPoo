@@ -21,4 +21,13 @@ public class Cliente_Parking extends Persona{
 		this.puntos = puntos;
 		this.placa = placa;
 	}
+	@Override
+	public String toString() {
+		return placa;
+	}
+	
+	
+	
+	
+	
 }

@@ -19,8 +19,6 @@ import java.text.DateFormat;
 import java.text.SimpleDateFormat;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.util.ArrayList;
-import java.util.Iterator;
 import java.util.Map;
 import java.util.TreeMap;
 import java.util.TreeSet;
@@ -334,10 +332,10 @@ public class UISwing extends JFrame{
 				LocalDateTime l=LocalDateTime.now();
 				String tipo=(String) comboBoxTipoV.getSelectedItem();
 				if(tipo.equals("Moto")){
-					Motorcycle m = new Motorcycle(txtPlaca.getText(), txtMarca.getText());
+					Motorcycle m = new Motorcycle( txtMarca.getText(),txtPlaca.getText());
 					pm.addVehicle(m,l);
 				}else {
-					Car c = new Car(txtPlaca.getText(), txtMarca.getText());
+					Car c = new Car(txtMarca.getText(),txtPlaca.getText());
 					pm.addVehicle(c,l);
 				}	
 				txtPlaca.setText("");
@@ -347,14 +345,8 @@ public class UISwing extends JFrame{
 			showPanelMenu();
 			}
 		});	
-		/*comboBoxTipoV.addActionListener(new ActionListener () {
-			public void actionPerformed (ActionEvent e) {
-				//???
-				showPanelMenu();
-			}
-			
-		});*/
-	}
+		
+		}
 	
 	private void setupPanelEstado() {
 		this.panelEstado = new JPanel();
@@ -400,7 +392,7 @@ public class UISwing extends JFrame{
 		this.panelEstado.add(scrollPane, gbc_scrollPane);
 		
 		Object[][] rows = new Object[tabla.size()][4];
-		 String[] cabeza={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
+		 String[] cabeza={ "Placa", "Marca", "Tipo Vehículo", "Tiempo (minutos)"};
 		 int i=0;
 		 for(Map.Entry<Vehicle,LocalDateTime> entry : tabla.entrySet()) {
 				Vehicle key = entry.getKey(); 
@@ -484,9 +476,7 @@ public class UISwing extends JFrame{
 		buttonBackPagos.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
 				panelPagos.remove(buttonBackPagos);
-				//panelPagos.remove(scrollPanePagos);
-				panelPagos.remove(lblNoAutoPagos);
-				
+				panelPagos.remove(lblNoAutoPagos);	
 				remove(panelPagos);
 				showPanelMenu();
 				
@@ -516,7 +506,7 @@ public class UISwing extends JFrame{
 			this.panelPagos.add(scrollPanePagos, gbc_scrollPanePagos);
 			
 			Object[][] rows = new Object[tablaP.size()][4];
-			 String[] cabezal={"Marca", "Placa", "Tipo Vehículo", "Tiempo (minutos)"};
+			 String[] cabezal={ "Placa","Marca", "Tipo Vehículo", "Tiempo (minutos)"};
 			 int i=0;
 			 for(Map.Entry<Vehicle,LocalDateTime> entry : tablaP.entrySet()) {
 					Vehicle key = entry.getKey(); 
@@ -544,14 +534,15 @@ public class UISwing extends JFrame{
 		//listeners
 		btnPagar.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
-					int row=tablePagos.getSelectedRow();
+					if (tablePagos.getSelectedRow() != -1) {
 					panelPagos.remove(buttonBackPagos);
 					panelPagos.remove(scrollPanePagos);
+					String placa=(String) tablePagos.getModel().getValueAt(tablePagos.getSelectedRow(),0);	
 					
-					String placa=(String) tablePagos.getValueAt(row, 0);
 					Vehicle v=pm.searchVehicle(placa);
-					
 					Cliente_Parking c =cm.searchClient(placa);
+					
+					System.out.println(c);
 					
 					if(c!=null) {
 						facturaCF(v,c);
@@ -560,7 +551,7 @@ public class UISwing extends JFrame{
 					}
 								
 					remove(panelPagos);
-					
+					}
 			
 			}
 			});
@@ -713,6 +704,7 @@ public class UISwing extends JFrame{
 				panelFactura.remove(buttonBackFactura);
 				remove(panelFactura);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
 				});
@@ -857,7 +849,9 @@ public class UISwing extends JFrame{
 		gbc_buttonBackFactura.gridy = 0;
 		this.panelFacturaFrecuente.add(buttonBackFactura, gbc_buttonBackFactura);
 		
-				
+		this.add(this.panelFacturaFrecuente);
+		this.pack();
+		
 		//listeners
 		btnRealizarPagoFrecuente.addActionListener(new ActionListener () {
 			public void actionPerformed (ActionEvent e) {
@@ -880,6 +874,7 @@ public class UISwing extends JFrame{
 				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
 				});
@@ -1211,8 +1206,6 @@ public class UISwing extends JFrame{
 						showClients(cm.getClientes());
 						}
 						});
-		
-
 	}
 	
 	private void setupPanelClientes() {
@@ -1224,7 +1217,6 @@ public class UISwing extends JFrame{
 		gridBagLayoutClientes.rowWeights = new double[]{0.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, Double.MIN_VALUE};
 		this.panelClientes.setLayout(gridBagLayoutClientes);
 		
-		//final JTable  tablePagos;
 		JLabel lblClientes = new JLabel("Clientes");
 		lblClientes.setFont(new Font("Tahoma", Font.PLAIN, 15));
 		GridBagConstraints gbc_lblClientes = new GridBagConstraints();
@@ -1288,11 +1280,9 @@ public class UISwing extends JFrame{
 			public void actionPerformed (ActionEvent e) {
 				panelClientes.remove(buttonBackClientes);
 				panelClientes.remove(scrollPaneClientes);
-				panelClientes.remove(lblNoAutoClientes);
-				
+				panelClientes.remove(lblNoAutoClientes);	
 				remove(panelClientes);
-				showPanelMenu();
-				
+				showPanelMenu();			
 				}
 				});
 					
