@@ -630,8 +630,13 @@ public class UISwing extends JFrame{
 		gbc_lblPlaca.gridy = 4;
 		this.panelFactura.add(lblPlaca, gbc_lblPlaca);
 		
+		LocalDateTime Entrada = pm.getVehicles().get(v);
+		int hours1  = Entrada.getHour();
+		int minutes1 = Entrada.getMinute();
+		int seconds1 = Entrada.getSecond();
+		String horaFacturaEntradaC = (""+ hours1+":"+minutes1+":"+seconds1);
 		
-		JLabel lblHoraEntrada = new JLabel("Hora Entrada: "+ pm.getVehicles().get(v));
+		JLabel lblHoraEntrada = new JLabel("Hora Entrada: "+horaFacturaEntradaC);
 		GridBagConstraints gbc_lblHoraEntrada = new GridBagConstraints();
 		gbc_lblHoraEntrada.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraEntrada.gridx = 1;
@@ -784,7 +789,13 @@ public class UISwing extends JFrame{
 		gbc_lblPlacaFrecuente.gridy = 6;
 		this.panelFacturaFrecuente.add(lblPlacaFrecuente, gbc_lblPlacaFrecuente);
 		
-		JLabel lblHoraEntradaFrecuente = new JLabel("Hora Entrada: "+ pm.getVehicles().get(v));
+		LocalDateTime Entrada = pm.getVehicles().get(v);
+		int hours1  = Entrada.getHour();
+		int minutes1 = Entrada.getMinute();
+		int seconds1 = Entrada.getSecond();
+		String horaFacturaEntradaC = (""+ hours1+":"+minutes1+":"+seconds1);
+		
+		JLabel lblHoraEntradaFrecuente = new JLabel("Hora Entrada: "+horaFacturaEntradaC);
 		GridBagConstraints gbc_lblHoraEntradaFrecuente = new GridBagConstraints();
 		gbc_lblHoraEntradaFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraEntradaFrecuente.gridx = 1;
