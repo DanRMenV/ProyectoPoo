@@ -725,16 +725,6 @@ public class UISwing extends JFrame{
 		gbc_lblPuntosClienteFrecuente.gridy = 2;
 		this.panelFacturaFrecuente.add(lblPuntosClienteFrecuente, gbc_lblPuntosClienteFrecuente);
 		
-		JTextArea textAreaPuntosClienteFrecuente = new JTextArea();
-		textAreaPuntosClienteFrecuente.setEditable(false);
-		textAreaPuntosClienteFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaPuntosClienteFrecuente = new GridBagConstraints();
-		gbc_textAreaPuntosClienteFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaPuntosClienteFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaPuntosClienteFrecuente.gridx = 4;
-		gbc_textAreaPuntosClienteFrecuente.gridy = 2;
-		this.panelFacturaFrecuente.add(textAreaPuntosClienteFrecuente, gbc_textAreaPuntosClienteFrecuente);
-		
 		JLabel lblTipoVehiculoFrecuente = new JLabel("Tipo Vehículo: "+v.getNameClass());
 		GridBagConstraints gbc_lblTipoVehiculoFrecuente = new GridBagConstraints();
 		gbc_lblTipoVehiculoFrecuente.insets = new Insets(0, 0, 5, 5);
@@ -742,15 +732,6 @@ public class UISwing extends JFrame{
 		gbc_lblTipoVehiculoFrecuente.gridy = 4;
 		this.panelFacturaFrecuente.add(lblTipoVehiculoFrecuente, gbc_lblTipoVehiculoFrecuente);
 		
-		JTextArea textAreaTipoVehículoFrecuente = new JTextArea();
-		textAreaTipoVehículoFrecuente.setEditable(false);
-		textAreaTipoVehículoFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaTipoVehículoFrecuente = new GridBagConstraints();
-		gbc_textAreaTipoVehículoFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaTipoVehículoFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaTipoVehículoFrecuente.gridx = 4;
-		gbc_textAreaTipoVehículoFrecuente.gridy = 4;
-		this.panelFacturaFrecuente.add(textAreaTipoVehículoFrecuente, gbc_textAreaTipoVehículoFrecuente);
 		
 		JLabel lblPlacaFrecuente = new JLabel("Placa: "+ v.getPlaca());
 		GridBagConstraints gbc_lblPlacaFrecuente = new GridBagConstraints();
@@ -759,32 +740,12 @@ public class UISwing extends JFrame{
 		gbc_lblPlacaFrecuente.gridy = 6;
 		this.panelFacturaFrecuente.add(lblPlacaFrecuente, gbc_lblPlacaFrecuente);
 		
-		JTextArea textAreaPlacaFrecuente = new JTextArea();
-		textAreaPlacaFrecuente.setFont(new Font("Monospaced", Font.PLAIN, 13));
-		textAreaPlacaFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaPlacaFrecuente = new GridBagConstraints();
-		gbc_textAreaPlacaFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaPlacaFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaPlacaFrecuente.gridx = 4;
-		gbc_textAreaPlacaFrecuente.gridy = 6;
-		this.panelFacturaFrecuente.add(textAreaPlacaFrecuente, gbc_textAreaPlacaFrecuente);
-		
 		JLabel lblHoraEntradaFrecuente = new JLabel("Hora Entrada: "+ pm.getVehicles().get(v));
 		GridBagConstraints gbc_lblHoraEntradaFrecuente = new GridBagConstraints();
 		gbc_lblHoraEntradaFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblHoraEntradaFrecuente.gridx = 1;
 		gbc_lblHoraEntradaFrecuente.gridy = 8;
 		this.panelFacturaFrecuente.add(lblHoraEntradaFrecuente, gbc_lblHoraEntradaFrecuente);
-		
-		
-		JTextArea textAreaHoraEntradaFrecuente = new JTextArea();
-		textAreaHoraEntradaFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaHoraEntradaFrecuente = new GridBagConstraints();
-		gbc_textAreaHoraEntradaFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaHoraEntradaFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaHoraEntradaFrecuente.gridx = 4;
-		gbc_textAreaHoraEntradaFrecuente.gridy = 8;
-		this.panelFacturaFrecuente.add(textAreaHoraEntradaFrecuente, gbc_textAreaHoraEntradaFrecuente);
 		
 		LocalDateTime horaAct=LocalDateTime.now();
 		JLabel lblHoraSalidaFrecuente = new JLabel("Hora Salida: "+ horaAct);
@@ -794,15 +755,6 @@ public class UISwing extends JFrame{
 		gbc_lblHoraSalidaFrecuente.gridy = 10;
 		this.panelFacturaFrecuente.add(lblHoraSalidaFrecuente, gbc_lblHoraSalidaFrecuente);
 		
-		JTextArea textAreaHoraSalidaFrecuente = new JTextArea();
-		textAreaHoraSalidaFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaHoraSalidaFrecuente = new GridBagConstraints();
-		gbc_textAreaHoraSalidaFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaHoraSalidaFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaHoraSalidaFrecuente.gridx = 4;
-		gbc_textAreaHoraSalidaFrecuente.gridy = 10;
-		this.panelFacturaFrecuente.add(textAreaHoraSalidaFrecuente, gbc_textAreaHoraSalidaFrecuente);
-		
 		int minutos=0;
 		JLabel lblTiempominutosFrecuente = new JLabel("Tiempo(Minutos): "+ minutos);
 		GridBagConstraints gbc_lblTiempominutosFrecuente = new GridBagConstraints();
@@ -811,31 +763,13 @@ public class UISwing extends JFrame{
 		gbc_lblTiempominutosFrecuente.gridy = 12;
 		this.panelFacturaFrecuente.add(lblTiempominutosFrecuente, gbc_lblTiempominutosFrecuente);
 		
-		JTextArea textAreaTiempoFrecuente = new JTextArea();
-		textAreaTiempoFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaTiempoFrecuente = new GridBagConstraints();
-		gbc_textAreaTiempoFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaTiempoFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaTiempoFrecuente.gridx = 4;
-		gbc_textAreaTiempoFrecuente.gridy = 12;
-		this.panelFacturaFrecuente.add(textAreaTiempoFrecuente, gbc_textAreaTiempoFrecuente);
-		
 		JLabel lblPrecioTotalFrecuente = new JLabel("Precio Total: "+ v.getPrice(minutos));
 		GridBagConstraints gbc_lblPrecioTotalFrecuente = new GridBagConstraints();
 		gbc_lblPrecioTotalFrecuente.insets = new Insets(0, 0, 5, 5);
 		gbc_lblPrecioTotalFrecuente.gridx = 1;
 		gbc_lblPrecioTotalFrecuente.gridy = 14;
 		this.panelFacturaFrecuente.add(lblPrecioTotalFrecuente, gbc_lblPrecioTotalFrecuente);
-		
-		JTextArea textAreaPrecioFrecuente = new JTextArea();
-		textAreaPrecioFrecuente.setBackground(SystemColor.menu);
-		GridBagConstraints gbc_textAreaPrecioFrecuente = new GridBagConstraints();
-		gbc_textAreaPrecioFrecuente.insets = new Insets(0, 0, 5, 5);
-		gbc_textAreaPrecioFrecuente.fill = GridBagConstraints.BOTH;
-		gbc_textAreaPrecioFrecuente.gridx = 4;
-		gbc_textAreaPrecioFrecuente.gridy = 14;
-		this.panelFacturaFrecuente.add(textAreaPrecioFrecuente, gbc_textAreaPrecioFrecuente);
-		
+	
 		JLabel lblRedencionPuntos = new JLabel("Redención Puntos");
 		GridBagConstraints gbc_lblRedencionPuntos = new GridBagConstraints();
 		gbc_lblRedencionPuntos.insets = new Insets(0, 0, 5, 5);
@@ -872,13 +806,6 @@ public class UISwing extends JFrame{
 		gbc_lblDescuento.gridy = 20;
 		this.panelFacturaFrecuente.add(lblDescuento, gbc_lblDescuento);
 		
-		JTextArea textAreaDescuento = new JTextArea();
-		GridBagConstraints gbc_textAreaDescuento = new GridBagConstraints();
-		textAreaDescuento.setBackground(SystemColor.menu);
-		gbc_textAreaDescuento.fill = GridBagConstraints.HORIZONTAL;
-		gbc_textAreaDescuento.gridx = 4;
-		gbc_textAreaDescuento.gridy = 20;
-		this.panelFacturaFrecuente.add(textAreaDescuento, gbc_textAreaDescuento);	
 		
 		JLabel lblDineroIngresadoFrecuente = new JLabel("Dinero ingresado: ");
 		GridBagConstraints gbc_lblDineroIngresadoFrecuente = new GridBagConstraints();
