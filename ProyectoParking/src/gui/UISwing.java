@@ -878,6 +878,7 @@ public class UISwing extends JFrame{
 				panelFacturaFrecuente.remove(buttonBackFactura);
 				remove(panelFacturaFrecuente);
 				JOptionPane.showMessageDialog(null, "Pago realizado con éxito, su cambio es:");
+				
 				pm.deleteVehicle(v.getPlaca());
 				showPanelMenu();
 				}
